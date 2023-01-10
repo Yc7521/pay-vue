@@ -1,7 +1,11 @@
+<script setup></script>
+
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/pay/show">Show</router-link> |
+    <router-link to="/pay/scan">Scan</router-link>
   </nav>
   <router-view />
 </template>
@@ -12,7 +16,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #abb2bf;
+}
+
+@media (prefers-color-scheme: light) {
+  #app {
+    color: #2c3e50;
+  }
 }
 
 nav {
@@ -20,10 +30,16 @@ nav {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #9cb3c9;
 
     &.router-link-exact-active {
       color: #42b983;
+    }
+
+    @media (prefers-color-scheme: light) {
+      & {
+        color: #2c3e50;
+      }
     }
   }
 }
