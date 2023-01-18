@@ -4,8 +4,11 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
+    <router-link to="/login">L</router-link> |
+    <router-link to="/register">R</router-link> |
     <router-link to="/pay/show">Show</router-link> |
-    <router-link to="/pay/scan">Scan</router-link>
+    <router-link to="/pay/scan">Scan</router-link> |
+    <router-link to="/user">User</router-link>
   </nav>
   <router-view />
 </template>

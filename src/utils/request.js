@@ -4,7 +4,7 @@ import store from "@/store";
 import { getToken } from "@/utils/auth";
 import errorCode from "@/utils/errorCode";
 import { tansParams, blobValidate } from "@/utils/tools";
-import cache from "@/plugins/cache";
+import { session } from "@/plugins/cache";
 import { saveAs } from "file-saver";
 
 let downloadLoadingInstance;
@@ -15,7 +15,7 @@ axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 // 创建axios实例
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: "/api",
   // 超时
   timeout: 10000,
 });
@@ -49,13 +49,13 @@ service.interceptors.request.use(
             : config.data,
         time: new Date().getTime(),
       };
-      const sessionObj = cache.session.getJSON("sessionObj");
+      const sessionObj = session.getJSON("sessionObj");
       if (
         sessionObj === undefined ||
         sessionObj === null ||
         sessionObj === ""
       ) {
-        cache.session.setJSON("sessionObj", requestObj);
+        session.setJSON("sessionObj", requestObj);
       } else {
         const s_url = sessionObj.url; // 请求地址
         const s_data = sessionObj.data; // 请求数据
@@ -70,7 +70,7 @@ service.interceptors.request.use(
           console.warn(`[${s_url}]: ` + message);
           return Promise.reject(new Error(message));
         } else {
-          cache.session.setJSON("sessionObj", requestObj);
+          session.setJSON("sessionObj", requestObj);
         }
       }
     }
@@ -79,7 +79,7 @@ service.interceptors.request.use(
   (error) => {
     console.log(error);
     Promise.reject(error);
-  },
+  }
 );
 
 // 响应拦截器
@@ -106,7 +106,7 @@ service.interceptors.response.use(
             confirmButtonText: "重新登录",
             cancelButtonText: "取消",
             type: "warning",
-          },
+          }
         )
           .then(() => {
             isRelogin.show = false;
@@ -126,7 +126,7 @@ service.interceptors.response.use(
       ElMessage({ message: msg, type: "warning" });
       return Promise.reject("error");
     } else if (code !== 200) {
-      ElMessage.error({ title: msg });
+      ElMessage.error({ message: msg });
       return Promise.reject("error");
     } else {
       return res.data;
@@ -144,7 +144,7 @@ service.interceptors.response.use(
     }
     ElMessage({ message: message, type: "error", duration: 5 * 1000 });
     return Promise.reject(error);
-  },
+  }
 );
 
 // 通用下载方法

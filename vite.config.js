@@ -29,7 +29,7 @@ export default defineConfig({
     }),
 
     AutoImport({
-      imports: ["vue"],
+      imports: ["vue", "vue-router"],
       resolvers: [
         ElementPlusResolver(),
         IconsResolver({
@@ -53,4 +53,13 @@ export default defineConfig({
 
     Inspect(),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        // target: "http://127.0.0.1:8080",
+        target: "http://127.0.0.1:4523/m1/2193999-0-default/",
+        changeOrigin: true,
+      },
+    },
+  },
 });

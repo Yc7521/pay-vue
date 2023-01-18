@@ -1,10 +1,9 @@
 <script setup>
-import { reactive } from "vue";
 import vueQr from "vue-qr/src/packages/vue-qr.vue";
 
 let code = reactive({
   type: "pay",
-  money: 1,
+  money: 0,
 });
 
 function qr() {
@@ -14,10 +13,10 @@ function qr() {
 
 <template>
   <h3>Show Code</h3>
-  <input type="number" v-model="code.money" step="0.01" />
+  <el-input-number v-model="code.money" :step="10" />
   <div>
     <vue-qr :text="qr()" :size="200"></vue-qr>
   </div>
 </template>
 
-<style scoped></style>
+<style lang="less" scoped></style>

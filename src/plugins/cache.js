@@ -1,4 +1,4 @@
-const sessionCache = {
+export const session = {
   set(key, value) {
     if (!sessionStorage) {
       return;
@@ -31,7 +31,7 @@ const sessionCache = {
     sessionStorage.removeItem(key);
   },
 };
-const localCache = {
+export const local = {
   set(key, value) {
     if (!localStorage) {
       return;
@@ -63,15 +63,4 @@ const localCache = {
   remove(key) {
     localStorage.removeItem(key);
   },
-};
-
-export default {
-  /**
-   * 会话级缓存
-   */
-  session: sessionCache,
-  /**
-   * 本地缓存
-   */
-  local: localCache,
 };

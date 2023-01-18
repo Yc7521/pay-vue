@@ -1,6 +1,7 @@
 <script setup>
 import { QrStream, QrCapture } from "vue3-qr-reader";
-// eslint-disable-next-line no-undef
+import { changePassword } from "@/api/user/info.js";
+
 const data = reactive({
   error: "",
   result: "",
@@ -9,6 +10,15 @@ const data = reactive({
   camera: "rear",
   capture: false,
 });
+
+const onLoad = async () => {
+  try {
+    let res = await changePassword("1", "2");
+    console.log(res);
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const onInit = async (func) => {
   try {
@@ -34,6 +44,7 @@ const onInit = async (func) => {
     }
   }
 };
+
 // 识别结果回调
 const onDecode = (res) => {
   setTimeout(() => {
@@ -75,37 +86,40 @@ const onError = (res) => {
   data.result = res;
   data.stream = false;
 };
+
+onLoad();
 </script>
 
 <template>
   <h3>Scan Code</h3>
   <div class="reader">
-    <button class="sweep" @click="stream = true">扫一扫</button>
+    <button class="sweep" @click="data.stream = true">扫一扫</button>
 
     <button class="sweep">
-      <qr-capture :capture="capture" @decode="onDecode"></qr-capture>从相册选择
+      <qr-capture :capture="data.capture" @decode="onDecode"></qr-capture
+      >从相册选择
     </button>
 
     <qr-stream
       class="stream"
-      v-show="stream"
-      :torch="torch"
-      :camera="camera"
+      v-show="data.stream"
+      :torch="data.torch"
+      :camera="data.camera"
       @onInit="onInit"
       @decode="onDecode"
     >
-      <p v-show="error">{{ error }}</p>
-      <button @click="torch = !torch">
-        {{ torch ? "关闭闪光灯" : "开启闪光灯" }}
+      <p v-show="data.error">{{ data.error }}</p>
+      <button @click="data.torch = !data.torch">
+        {{ data.torch ? "关闭闪光灯" : "开启闪光灯" }}
       </button>
       <button @click="switchCamera">
-        {{ "rear" == camera ? "前置摄像头" : "后置摄像头" }}
+        {{ "rear" === data.camera ? "前置摄像头" : "后置摄像头" }}
       </button>
     </qr-stream>
 
     <textarea
       class="result"
-      v-model="result"
+      v-model="data.result"
       placeholder="二维码识别结果！"
     ></textarea>
   </div>
