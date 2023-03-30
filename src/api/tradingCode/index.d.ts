@@ -1,46 +1,117 @@
-import { PageTradingCode, TradingCode } from "../models";
+// @ts-ignore
+import { PageTradingCodeVm } from "../models";
+// @ts-ignore
+import { TradingCode } from "../models";
+// @ts-ignore
+import { TradingCodeVm } from "../models";
 
 /**
- * List all TradingCode.
- * GET /api/code
+ *
+ * @summary Remove a TradingCode by id if it\'s Finished.
+ * @param {number} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
  */
-declare function list(
-  page?: number | null,
-  size?: number | null
-): Promise<PageTradingCode>;
+declare function checkAndRemove(id: number, options?: {}): Promise<object>;
 
 /**
- * Submit a TradingCode.
- * POST /api/code
+ *
+ * @summary Get a TradingCode by id.
+ * @param {number} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
  */
-declare function create(data: TradingCode): Promise<TradingCode>;
+declare function get2(id: number, options?: {}): Promise<TradingCodeVm>;
 
 /**
- * Get a TradingCode by id.
- * GET /api/code/{id}
+ *
+ * @summary List TradingCode by userId.
+ * @param {number} userId
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
  */
-declare function get(id: number): Promise<TradingCode>;
+declare function getByUserId(
+  userId: number,
+  options?: {}
+): Promise<TradingCodeVm>;
 
 /**
- * Remove a TradingCode by id if it's Finished.
- * DELETE /api/code/{id}
+ *
+ * @summary Gen id, only test for admin users.
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
  */
-declare function delete_(id: number): Promise<any>;
+declare function getId(options?: {}): Promise<number>;
 
 /**
- * List TradingCode by userId.
- * GET /api/code/user/{userId}
+ *
+ * @summary Remove a TradingCode by id if it\'s Finished.
+ * @param {string} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
  */
-declare function getByUser(userId: number): Promise<TradingCode>;
+declare function checkAndRemove(id: string, options?: {}): Promise<object>;
 
 /**
- * Exist a TradingCode by id.
- * GET /api/code/has/{id}
+ *
+ * @summary Get a TradingCode by id.
+ * @param {string} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
  */
-declare function exist(id: number): Promise<boolean>;
+declare function get2(id: string, options?: {}): Promise<TradingCodeVm>;
 
 /**
- * Gen id, only test for admin users.
- * GET /api/code/getId
+ *
+ * @summary List TradingCode by userId.
+ * @param {number} userId
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
  */
-declare function getId(): Promise<number>;
+declare function getByUserId(
+  userId: number,
+  options?: {}
+): Promise<TradingCodeVm>;
+
+/**
+ *
+ * @summary Gen id, only test for admin users.
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
+ */
+declare function getId(options?: {}): Promise<number>;
+
+/**
+ *
+ * @summary Exist a TradingCode by id.
+ * @param {string} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
+ */
+declare function has(id: string, options?: {}): Promise<object>;
+
+/**
+ *
+ * @summary List all TradingCode.
+ * @param {number} [page]
+ * @param {number} [size]
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
+ */
+declare function list2(
+  page?: number,
+  size?: number,
+  options?: {}
+): Promise<PageTradingCodeVm>;
+
+/**
+ *
+ * @summary Submit a TradingCode.
+ * @param {TradingCode} [tradingCode]
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
+ */
+declare function put(
+  tradingCode?: TradingCode,
+  options?: {}
+): Promise<TradingCodeVm>;

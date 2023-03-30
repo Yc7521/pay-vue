@@ -21,78 +21,78 @@ import { PageableObject } from './pageable-object';
 import { SortObject } from './sort-object';
 // May contain unused imports in some cases
 // @ts-ignore
-import { TradingCode } from './trading-code';
+import { TradingCodeVm } from './trading-code-vm';
 
 /**
  * 
  * @export
- * @interface PageTradingCode
+ * @interface PageTradingCodeVm
  */
-export interface PageTradingCode {
+export interface PageTradingCodeVm {
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'totalElements'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'totalPages'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
+     */
+    'size'?: number;
+    /**
+     * 
+     * @type {Array<TradingCodeVm>}
+     * @memberof PageTradingCodeVm
+     */
+    'content'?: Array<TradingCodeVm>;
+    /**
+     * 
+     * @type {number}
+     * @memberof PageTradingCodeVm
      */
     'number'?: number;
     /**
      * 
      * @type {SortObject}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'sort'?: SortObject;
     /**
      * 
-     * @type {number}
-     * @memberof PageTradingCode
-     */
-    'size'?: number;
-    /**
-     * 
-     * @type {Array<TradingCode>}
-     * @memberof PageTradingCode
-     */
-    'content'?: Array<TradingCode>;
-    /**
-     * 
      * @type {PageableObject}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'pageable'?: PageableObject;
     /**
      * 
      * @type {boolean}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'first'?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'last'?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'numberOfElements'?: number;
     /**
      * 
      * @type {boolean}
-     * @memberof PageTradingCode
+     * @memberof PageTradingCodeVm
      */
     'empty'?: boolean;
 }

@@ -18,81 +18,81 @@
 import { PageableObject } from './pageable-object';
 // May contain unused imports in some cases
 // @ts-ignore
-import { SortObject } from './sort-object';
+import { RoleRequest } from './role-request';
 // May contain unused imports in some cases
 // @ts-ignore
-import { TradingCode } from './trading-code';
+import { SortObject } from './sort-object';
 
 /**
  * 
  * @export
- * @interface PageTradingCode
+ * @interface PageRoleRequest
  */
-export interface PageTradingCode {
+export interface PageRoleRequest {
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'totalElements'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'totalPages'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
+     */
+    'size'?: number;
+    /**
+     * 
+     * @type {Array<RoleRequest>}
+     * @memberof PageRoleRequest
+     */
+    'content'?: Array<RoleRequest>;
+    /**
+     * 
+     * @type {number}
+     * @memberof PageRoleRequest
      */
     'number'?: number;
     /**
      * 
      * @type {SortObject}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'sort'?: SortObject;
     /**
      * 
-     * @type {number}
-     * @memberof PageTradingCode
-     */
-    'size'?: number;
-    /**
-     * 
-     * @type {Array<TradingCode>}
-     * @memberof PageTradingCode
-     */
-    'content'?: Array<TradingCode>;
-    /**
-     * 
      * @type {PageableObject}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'pageable'?: PageableObject;
     /**
      * 
      * @type {boolean}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'first'?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'last'?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'numberOfElements'?: number;
     /**
      * 
      * @type {boolean}
-     * @memberof PageTradingCode
+     * @memberof PageRoleRequest
      */
     'empty'?: boolean;
 }

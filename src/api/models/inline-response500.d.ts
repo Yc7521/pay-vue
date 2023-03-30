@@ -17,26 +17,26 @@
 /**
  * 
  * @export
- * @interface SortObject
+ * @interface InlineResponse500
  */
-export interface SortObject {
+export interface InlineResponse500 {
     /**
      * 
-     * @type {boolean}
-     * @memberof SortObject
+     * @type {string}
+     * @memberof InlineResponse500
      */
-    'empty'?: boolean;
+    'msg'?: string;
     /**
      * 
-     * @type {boolean}
-     * @memberof SortObject
+     * @type {Array<string>}
+     * @memberof InlineResponse500
      */
-    'sorted'?: boolean;
+    'stack'?: Array<string>;
     /**
      * 
-     * @type {boolean}
-     * @memberof SortObject
+     * @type {string}
+     * @memberof InlineResponse500
      */
-    'unsorted'?: boolean;
+    'type'?: string;
 }
 

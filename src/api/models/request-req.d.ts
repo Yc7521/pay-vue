@@ -17,26 +17,26 @@
 /**
  * 
  * @export
- * @interface SortObject
+ * @interface RequestReq
  */
-export interface SortObject {
+export interface RequestReq {
     /**
      * 
-     * @type {boolean}
-     * @memberof SortObject
+     * @type {string}
+     * @memberof RequestReq
      */
-    'empty'?: boolean;
+    'name': string;
     /**
      * 
-     * @type {boolean}
-     * @memberof SortObject
+     * @type {string}
+     * @memberof RequestReq
      */
-    'sorted'?: boolean;
+    'idCard': string;
     /**
      * 
-     * @type {boolean}
-     * @memberof SortObject
+     * @type {string}
+     * @memberof RequestReq
      */
-    'unsorted'?: boolean;
+    'remarks'?: string;
 }
 

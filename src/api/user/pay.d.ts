@@ -1,32 +1,79 @@
-import { PagePayInfo, PayInfo, PayVm } from "../models";
+// @ts-ignore
+import { PagePayInfo } from "../models";
+// @ts-ignore
+import { PayInfo } from "../models";
+// @ts-ignore
+import { PayVm } from "../models";
 
 /**
- * List all PayInfo.
- * GET /api/user/me/pay
+ * Update PayInfo to cancel this payment
+ * @summary Cancel.
+ * @param {number} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserPayApiInterface
+ */
+declare function cancel(id: number, options?: {}): Promise<PayInfo>;
+
+/**
+ *
+ * @summary /api/user/me/pay/code/{codeId}/cancel
+ * @param {string} codeId
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserPayApiInterface
+ */
+declare function cancelWithCode(codeId: string, options?: {}): Promise<PayInfo>;
+
+/**
+ * Pay to user
+ * @summary Create PayInfo by userId.
+ * @param {PayVm} [payVm]
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserPayApiInterface
+ */
+declare function createPayment(payVm?: PayVm, options?: {}): Promise<PayInfo>;
+
+/**
+ *
+ * @summary /api/user/me/pay/code/{codeId}
+ * @param {string} codeId
+ * @param {number} [money]
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserPayApiInterface
+ */
+declare function createPaymentWithCode(
+  codeId: string,
+  money?: number,
+  options?: {}
+): Promise<PayInfo>;
+
+/**
+ *
+ * @summary List all PayInfo.
+ * @param {number} [page]
+ * @param {number} [size]
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserPayApiInterface
  */
 declare function list(
-  page?: number | null,
-  size?: number | null
+  page?: number,
+  size?: number,
+  options?: {}
 ): Promise<PagePayInfo>;
 
 /**
- * Create PayInfo by userId.
- * POST /api/user/me/pay
- */
-declare function create(data: PayVm): Promise<PayInfo>;
-
-/**
- * Pay.
  * Update PayInfo and UserInfo to finish this payment
- * Will not delete the TradingCode
- * PUT /api/user/me/pay/{id}
+ * @summary Pay.
+ * @param {number} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserPayApiInterface
  */
-declare function pay(id: number): Promise<PayInfo>;
+declare function pay(id: number, options?: {}): Promise<PayInfo>;
 
 /**
- * Cancel.
- * Update PayInfo to cancel this payment
- * Will not delete the TradingCode
- * PUT /api/user/me/pay/{id}/cancel
+ *
+ * @summary /api/user/me/pay/code/{codeId}
+ * @param {string} codeId
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserPayApiInterface
  */
-declare function cancel(id: number): Promise<PayInfo>;
+declare function payWithCode(codeId: string, options?: {}): Promise<PayInfo>;
