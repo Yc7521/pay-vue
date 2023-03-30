@@ -1,0 +1,35 @@
+// styles/element/index.scss
+/* 只需要重写你需要的即可 */
+@use "element-plus/theme-chalk/src/common/var.scss" with (
+  $colors: (
+    "white": #fafcffff,
+    "black": #001f2aff,
+    "primary": (
+      "base": #006689ff,
+    ),
+    "success": (
+      "base": #00677dff,
+    ),
+    "warning": (
+      "base": #6b4cacff,
+    ),
+    "danger": (
+      "base": #ba1a1aff,
+    ),
+    "error": (
+      "base": #ba1a1aff,
+    ),
+    "info": (
+      "base": #71787dff,
+    ),
+  ),
+  $bg-color: (
+    "page": #fafcffff,
+    "": #fafcffff,
+    "overlay": #fafcffff,
+  )
+);
+
+// 如果只是按需导入，则可以忽略以下内容。
+// 如果你想导入所有样式:
+@use "element-plus/theme-chalk/src/index.scss" as *;

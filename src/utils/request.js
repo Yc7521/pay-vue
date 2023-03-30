@@ -9,7 +9,7 @@ import { saveAs } from "file-saver";
 
 let downloadLoadingInstance;
 // 是否显示重新登录
-export let isRelogin = { show: false };
+export let isReLogin = { show: false };
 
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 // 创建axios实例
@@ -19,6 +19,30 @@ const service = axios.create({
   // 超时
   timeout: 10000,
 });
+
+function reLogin() {
+  if (!isReLogin.show) {
+    isReLogin.show = true;
+    ElMessageBox.confirm(
+      "登录状态已过期，您可以继续留在该页面，或者重新登录",
+      "系统提示",
+      {
+        confirmButtonText: "重新登录",
+        cancelButtonText: "取消",
+        type: "warning",
+      }
+    )
+      .then(() => {
+        isReLogin.show = false;
+        store.dispatch("user/logout").then(() => {
+          location.href = "/login";
+        });
+      })
+      .catch(() => {
+        isReLogin.show = false;
+      });
+  }
+}
 
 // request拦截器
 service.interceptors.request.use(
@@ -97,27 +121,7 @@ service.interceptors.response.use(
       return res.data;
     }
     if (code === 401) {
-      if (!isRelogin.show) {
-        isRelogin.show = true;
-        ElMessageBox.confirm(
-          "登录状态已过期，您可以继续留在该页面，或者重新登录",
-          "系统提示",
-          {
-            confirmButtonText: "重新登录",
-            cancelButtonText: "取消",
-            type: "warning",
-          }
-        )
-          .then(() => {
-            isRelogin.show = false;
-            store.dispatch("LogOut").then(() => {
-              location.href = "/index";
-            });
-          })
-          .catch(() => {
-            isRelogin.show = false;
-          });
-      }
+      reLogin();
       return Promise.reject("无效的会话，或者会话已过期，请重新登录。");
     } else if (code === 500) {
       ElMessage({ message: msg, type: "error" });
@@ -133,16 +137,20 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    console.log("err" + error);
-    let { message } = error;
-    if (message == "Network Error") {
-      message = "后端接口连接异常";
-    } else if (message.includes("timeout")) {
-      message = "系统接口请求超时";
-    } else if (message.includes("Request failed with status code")) {
-      message = "系统接口" + message.substr(message.length - 3) + "异常";
+    console.log("err", error);
+    if (error.response.status === 401) {
+      reLogin();
+    } else {
+      let { message } = error;
+      if (message === "Network Error") {
+        message = "后端接口连接异常";
+      } else if (message.includes("timeout")) {
+        message = "系统接口请求超时";
+      } else if (message.includes("Request failed with status code")) {
+        message = "系统接口" + message.slice(-3) + "异常";
+      }
+      ElMessage({ message: message, type: "error", duration: 5 * 1000 });
     }
-    ElMessage({ message: message, type: "error", duration: 5 * 1000 });
     return Promise.reject(error);
   }
 );

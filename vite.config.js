@@ -29,13 +29,15 @@ export default defineConfig({
     }),
 
     AutoImport({
-      imports: ["vue", "vue-router"],
+      imports: ["vue", "vuex", "vue-router"],
       resolvers: [
-        ElementPlusResolver(),
         IconsResolver({
           prefix: "Icon",
         }),
       ],
+      eslintrc: {
+        enabled: true,
+      },
     }),
 
     Components({
@@ -43,7 +45,9 @@ export default defineConfig({
         IconsResolver({
           enabledCollections: ["ep"],
         }),
-        ElementPlusResolver(),
+        ElementPlusResolver({
+          importStyle: false,
+        }),
       ],
     }),
 
@@ -54,10 +58,14 @@ export default defineConfig({
     Inspect(),
   ],
   server: {
+    https: {
+      key: "keys/agent2-key.pem",
+      cert: "keys/agent2-cert.pem",
+    },
     proxy: {
       "/api": {
-        // target: "http://127.0.0.1:8080",
-        target: "http://127.0.0.1:4523/m1/2193999-0-default/",
+        target: "http://127.0.0.1:8080",
+        // target: "http://127.0.0.1:4523/m1/2193999-0-default/",
         changeOrigin: true,
       },
     },

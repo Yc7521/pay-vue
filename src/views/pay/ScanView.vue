@@ -1,56 +1,132 @@
 <script setup>
 import { QrStream, QrCapture } from "vue3-qr-reader";
-import { changePassword } from "@/api/user/info.js";
+import {
+  cancelWithCode,
+  createPaymentWithCode,
+  payWithCode,
+} from "@/api/user/pay";
+import { TradingCodeVm } from "@/api/models/trading-code-vm.d.js";
+import { ElMessage, ElMessageBox } from "element-plus";
+// import { changePassword } from "@/api/user/info.js";
 
 const data = reactive({
   error: "",
-  result: "",
+  result: a,
   stream: false,
   torch: false,
   camera: "rear",
   capture: false,
+  message: "",
 });
 
-const onLoad = async () => {
+function onError(e) {
+  const error = e.reason;
+  if (error.name === "NotAllowedError") {
+    data.error = "错误: 您需要授予相机访问权限!";
+  } else if (error.name === "NotFoundError") {
+    data.error = "错误: 此设备上没有摄像头!";
+  } else if (error.name === "NotSupportedError") {
+    data.error = "错误: 需要安全上下文(HTTPS, 本地主机)!";
+  } else if (error.name === "NotReadableError") {
+    data.error = "错误: 相机是否已经在使用？";
+  } else if (error.name === "OverconstrainedError") {
+    data.error = "错误: 安装的摄像头不合适!";
+  } else if (error.name === "StreamApiNotSupportedError") {
+    data.error = "错误: 此浏览器不支持 Stream API!";
+  } else if (error.name === "InsecureContextError") {
+    data.error =
+      "错误: 仅在安全上下文中允许访问相机。使用 HTTPS 或 localhost 而不是 HTTP!";
+  } else {
+    data.error = `错误: 相机错误(${error.name})!`;
+  }
+  setTimeout(() => {
+    data.stream = false;
+  }, 1000);
+}
+
+onMounted(async () => {
   try {
-    let res = await changePassword("1", "2");
-    console.log(res);
+    // let res = await changePassword("1", "2");
+    // console.log(res);
+    console.log("onLoad");
+    window.addEventListener("unhandledrejection", onError);
   } catch (e) {
     console.log(e);
   }
-};
+});
+onUnmounted(() => {
+  window.removeEventListener("unhandledrejection", onError);
+});
 
-const onInit = async (func) => {
+async function hasCode({ id }) {
   try {
-    await func;
-  } catch (error) {
-    if (error.name === "NotAllowedError") {
-      data.error = "错误: 您需要授予相机访问权限!";
-    } else if (error.name === "NotFoundError") {
-      data.error = "错误: 此设备上没有摄像头!";
-    } else if (error.name === "NotSupportedError") {
-      data.error = "错误: 需要安全上下文(HTTPS, 本地主机)!";
-    } else if (error.name === "NotReadableError") {
-      data.error = "错误: 相机是否已经在使用？";
-    } else if (error.name === "OverconstrainedError") {
-      data.error = "错误: 安装的摄像头不合适!";
-    } else if (error.name === "StreamApiNotSupportedError") {
-      data.error = "错误: 此浏览器不支持 Stream API!";
-    } else if (error.name === "InsecureContextError") {
-      data.error =
-        "错误: 仅在安全上下文中允许访问相机。使用 HTTPS 或 localhost 而不是 HTTP!";
-    } else {
-      data.error = `错误: 相机错误(${error.name})!`;
+    await exist(id);
+    data.message += `服务器存在此二维码\n`;
+    return true;
+  } catch (e) {
+    data.message += `服务器不存在此二维码\n`;
+    return false;
+  }
+}
+
+watch(
+  () => data.result,
+  async (val: TradingCodeVm) => {
+    if (val) {
+      let { id, userInfoId, tradingType, money } = val;
+      if (id && userInfoId && tradingType) {
+        if (await hasCode(val)) {
+          if (tradingType === "Receipt") {
+            let payment = await createPaymentWithCode(id, money);
+            let res = await ElMessageBox.confirm(
+              `向${payment.receivingUser.nickname}付款${payment.money}元`,
+              "确认付款",
+              {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
+              }
+            );
+            if (res === "confirm") {
+              await payWithCode(id);
+              ElMessage({
+                type: "success",
+                message: "付款成功!",
+              });
+            } else {
+              await cancelWithCode(id);
+              ElMessage({
+                type: "info",
+                message: "付款取消!",
+              });
+            }
+          } else if (tradingType === "Payment") {
+            // 收款
+            data.message += `收款${money}元\n`;
+            // TODO
+          }
+        } else {
+          ElMessage({
+            type: "error",
+            message: "二维码无效!",
+          });
+        }
+      }
     }
   }
-};
+);
 
 // 识别结果回调
 const onDecode = (res) => {
-  setTimeout(() => {
-    data.result = res;
-    data.stream = false;
-  }, 600);
+  try {
+    data.result = JSON.parse(res);
+    console.log(data.result);
+    setTimeout(() => {
+      data.stream = false;
+    }, 600);
+  } catch (e) {
+    console.log("decode error", e);
+  }
 };
 
 // 切换前后置摄像头
@@ -79,15 +155,6 @@ const paintBoundingBox = (detectedCodes, ctx) => {
     ctx.strokeRect(x, y, width, height);
   }
 };
-
-// 错误回调
-// eslint-disable-next-line no-unused-vars
-const onError = (res) => {
-  data.result = res;
-  data.stream = false;
-};
-
-onLoad();
 </script>
 
 <template>
@@ -96,8 +163,8 @@ onLoad();
     <button class="sweep" @click="data.stream = true">扫一扫</button>
 
     <button class="sweep">
-      <qr-capture :capture="data.capture" @decode="onDecode"></qr-capture
-      >从相册选择
+      <qr-capture :capture="data.capture" @decode="onDecode"></qr-capture>
+      从相册选择
     </button>
 
     <qr-stream
@@ -105,9 +172,9 @@ onLoad();
       v-show="data.stream"
       :torch="data.torch"
       :camera="data.camera"
-      @onInit="onInit"
       @decode="onDecode"
     >
+      <div style="color: red" class="frame"></div>
       <p v-show="data.error">{{ data.error }}</p>
       <button @click="data.torch = !data.torch">
         {{ data.torch ? "关闭闪光灯" : "开启闪光灯" }}
@@ -115,12 +182,13 @@ onLoad();
       <button @click="switchCamera">
         {{ "rear" === data.camera ? "前置摄像头" : "后置摄像头" }}
       </button>
+      <button @click="data.stream = !data.stream">退出</button>
     </qr-stream>
 
     <textarea
       class="result"
-      v-model="data.result"
-      placeholder="二维码识别结果！"
+      v-model="data.message"
+      placeholder="信息"
     ></textarea>
   </div>
 </template>
@@ -185,5 +253,19 @@ onLoad();
     border-radius: 6px;
     border: 1px solid gray;
   }
+}
+
+.frame {
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  margin: auto;
 }
 </style>
