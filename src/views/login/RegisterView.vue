@@ -1,5 +1,5 @@
 <script setup>
-import { register } from "@/api/system/login.d.js";
+import { register } from "@/api/system/login";
 
 const data = reactive({
   username: "",

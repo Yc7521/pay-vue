@@ -59,7 +59,7 @@ declare function checkAndRemove(id: string, options?: {}): Promise<object>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function get2(id: string, options?: {}): Promise<TradingCodeVm>;
+declare function get2(id: string, options?: {}): Promise<TradingCode>;
 
 /**
  *

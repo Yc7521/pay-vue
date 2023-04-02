@@ -5,13 +5,13 @@ import {
   createPaymentWithCode,
   payWithCode,
 } from "@/api/user/pay";
-import { TradingCodeVm } from "@/api/models/trading-code-vm.d.js";
 import { ElMessage, ElMessageBox } from "element-plus";
+import { has } from "@/api/tradingCode/index";
 // import { changePassword } from "@/api/user/info.js";
 
 const data = reactive({
   error: "",
-  result: a,
+  result: {},
   stream: false,
   torch: false,
   camera: "rear",
@@ -60,7 +60,7 @@ onUnmounted(() => {
 
 async function hasCode({ id }) {
   try {
-    await exist(id);
+    await has(id);
     data.message += `服务器存在此二维码\n`;
     return true;
   } catch (e) {
@@ -71,7 +71,7 @@ async function hasCode({ id }) {
 
 watch(
   () => data.result,
-  async (val: TradingCodeVm) => {
+  async (val) => {
     if (val) {
       let { id, userInfoId, tradingType, money } = val;
       if (id && userInfoId && tradingType) {

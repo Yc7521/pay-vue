@@ -13,7 +13,7 @@
     "@vueuse/components": "^9.13.0",
     "@vueuse/core": "^9.13.0",
     "axios": "^1.2.2",
-    "element-plus": "^2.2.28",
+    "element-plus": "2.2.2",
     "file-saver": "^2.0.5",
     "qrcode-decoder": "^0.3.3",
     "unplugin-icons": "^0.15.1",

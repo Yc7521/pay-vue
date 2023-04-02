@@ -1,5 +1,5 @@
 <script setup>
-import { login } from "@/api/system/login.d.js";
+import { login } from "@/api/system/login";
 import { setToken } from "@/utils/auth";
 import { me } from "@/api/user/info.js";
 import { useStore } from "vuex";
@@ -13,7 +13,10 @@ const router = useRouter();
 const store = useStore();
 
 async function doLogin() {
-  let res = await login(data.username, data.password);
+  let res = await login({
+    username: data.username,
+    password: data.password,
+  });
   msg.value = res.msg;
   console.log(res.msg);
   if (res.error) {
@@ -47,10 +50,24 @@ async function doRegister() {
           <el-row>{{ msg }}</el-row>
         </el-form-item>
         <el-form-item label="username">
-          <el-input v-model="data.username" />
+          <el-input
+            ref="username"
+            v-model="data.username"
+            autofocus
+            clearable
+            tabindex="0"
+            v-on:keyup.enter="$refs.password.focus()"
+          />
         </el-form-item>
         <el-form-item label="password">
-          <el-input v-model="data.password" />
+          <el-input
+            ref="password"
+            v-model="data.password"
+            show-password
+            clearable
+            tabindex="0"
+            v-on:keyup.enter="doLogin"
+          />
         </el-form-item>
         <el-button type="primary" @click="doLogin">Login</el-button>
         <el-button @click="doRegister">Register</el-button>
