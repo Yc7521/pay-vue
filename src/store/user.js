@@ -4,6 +4,7 @@ export default {
     userId: 0,
     nickname: "",
     money: 0,
+    userType: null,
   },
   getters: {},
   mutations: {
@@ -11,6 +12,7 @@ export default {
       state.userId = user.id;
       state.nickname = user.nickname;
       state.money = user.money;
+      state.userType = user.userType;
     },
   },
   actions: {

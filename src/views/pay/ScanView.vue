@@ -78,27 +78,35 @@ watch(
         if (await hasCode(val)) {
           if (tradingType === "Receipt") {
             let payment = await createPaymentWithCode(id, money);
-            let res = await ElMessageBox.confirm(
-              `向${payment.receivingUser.nickname}付款${payment.money}元`,
-              "确认付款",
-              {
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                type: "warning",
+            try {
+              let res = await ElMessageBox.confirm(
+                `向${payment.receivingUser.nickname}付款${payment.money}元`,
+                "确认付款",
+                {
+                  confirmButtonText: "确定",
+                  cancelButtonText: "取消",
+                  type: "warning",
+                }
+              );
+              console.log("res", res);
+              if (res === "confirm") {
+                await payWithCode(id);
+                ElMessage({
+                  type: "success",
+                  message: "付款成功!",
+                });
+                data.message += `付款成功!\n`;
               }
-            );
-            if (res === "confirm") {
-              await payWithCode(id);
-              ElMessage({
-                type: "success",
-                message: "付款成功!",
-              });
-            } else {
-              await cancelWithCode(id);
-              ElMessage({
-                type: "info",
-                message: "付款取消!",
-              });
+            } catch (e) {
+              if (e === "cancel") {
+                await cancelWithCode(id);
+                ElMessage({
+                  type: "info",
+                  message: "付款取消!",
+                });
+                data.message += `取消成功!\n`;
+              }
+              throw e;
             }
           } else if (tradingType === "Payment") {
             // 收款
@@ -120,7 +128,6 @@ watch(
 const onDecode = (res) => {
   try {
     data.result = JSON.parse(res);
-    console.log(data.result);
     setTimeout(() => {
       data.stream = false;
     }, 600);

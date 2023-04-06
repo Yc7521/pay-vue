@@ -13,11 +13,12 @@ const store = useStore();
 
 onMounted(async () => {
   data.userInfo = store.state.user;
-  if (!data.userInfo.id) {
+  if (!data.userInfo.userId) {
     let res = await me();
     if (res) {
       store.commit("user/setUser", res);
       data.userInfo = res;
+      console.log(res);
     } else {
       await router.push({
         name: "login",
@@ -42,13 +43,16 @@ async function doLogout() {
 <template>
   <div></div>
   <div>
-    Hello, {{ data.userInfo.nickname }}!
-    <el-tag class="cursor-pointer" size="small" round @click="doLogout">
-      Logout
-    </el-tag>
+    <div>
+      Hello, {{ data.userInfo.nickname }}
+      <el-tag class="cursor-pointer" size="small" round @click="doLogout">
+        Logout
+      </el-tag>
+    </div>
+    <div>Type: {{ data.userInfo.userType }}</div>
   </div>
   <div>money: {{ data.userInfo.money }}</div>
-  <h2>Payment History</h2>
+  <h2 class="mt-3">Payment History</h2>
   <el-table :data="data.payments.content">
     <el-table-column prop="id" label="id" />
     <el-table-column prop="money" label="money" />

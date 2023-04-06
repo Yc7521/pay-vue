@@ -22,7 +22,7 @@ async function doLogin() {
   if (res.error) {
     return;
   }
-  setToken(res.id_token);
+  setToken(res.idToken);
   let info = await me();
   store.commit("user/setUser", info);
   await router.push({

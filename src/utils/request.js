@@ -147,9 +147,11 @@ service.interceptors.response.use(
       } else if (message.includes("timeout")) {
         message = "系统接口请求超时";
       } else if (message.includes("Request failed with status code")) {
-        message = "系统接口" + message.slice(-3) + "异常";
+        // message = "系统接口" + message.slice(-3) + "异常";
+        message = "";
       }
-      ElMessage({ message: message, type: "error", duration: 5 * 1000 });
+      if (message)
+        ElMessage({ message: message, type: "error", duration: 5 * 1000 });
     }
     return Promise.reject(error);
   }

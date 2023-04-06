@@ -37,6 +37,6 @@ export interface LoginRes {
      * @type {string}
      * @memberof LoginRes
      */
-    'id_token'?: string;
+    'idToken'?: string;
 }
 
