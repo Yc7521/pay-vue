@@ -1,14 +1,6 @@
 <script setup>
 import { UseDark } from "@vueuse/components";
-/*
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/login">L</router-link> |
-    <router-link to="/register">R</router-link> |
-    <router-link to="/pay/show">Show</router-link> |
-    <router-link to="/pay/scan">Scan</router-link> |
-    <router-link to="/user">User</router-link>
- */
+
 const data = reactive({
   links: [
     { name: "Home", path: "/" },
@@ -18,13 +10,20 @@ const data = reactive({
     { name: "Show", path: "/pay/show" },
     { name: "Scan", path: "/pay/scan" },
     { name: "User", path: "/user" },
-    { name: "Test", path: "/test" },
+    { name: "Cookie Shop", path: "/test" },
   ],
 });
+
+const show_nav = ref(true);
+// if mobile, show nav
+if (window.innerWidth > 768) {
+  // show_nav.value = false;
+}
+
 </script>
 
 <template>
-  <nav>
+  <nav v-if="show_nav">
     <el-space spacer="|" wrap>
       <div v-for="{ name, path } in data.links" :key="path">
         <router-link :to="path">{{ name }}</router-link>

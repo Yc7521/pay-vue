@@ -1,4 +1,4 @@
-:root {
+:root.dark {
  --color-primary: var(--md-sys-color-primary-dark);
  --color-on-primary: var(--md-sys-color-on-primary-dark);
  --color-primary-container: var(--md-sys-color-primary-container-dark);

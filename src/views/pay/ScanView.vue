@@ -74,6 +74,7 @@ watch(
   async (val) => {
     if (val) {
       let { id, userInfoId, tradingType, money } = val;
+      console.log(val);
       if (id && userInfoId && tradingType) {
         if (await hasCode(val)) {
           if (tradingType === "Receipt") {

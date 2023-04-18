@@ -13,7 +13,18 @@ const router = useRouter();
 
 async function doRegister() {
   try {
-    await register(data.username, data.password);
+    await register(
+      {
+        username: data.username,
+        password: data.password,
+      },
+      {
+        // headers: {
+        //   isToken: false,
+        //   Authorization: "",
+        // },
+      }
+    );
     msg.color = "#6cf";
     msg.text = "Register Success";
     setTimeout(async () => {

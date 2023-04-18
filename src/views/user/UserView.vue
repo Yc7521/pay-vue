@@ -13,7 +13,8 @@ const store = useStore();
 
 onMounted(async () => {
   data.userInfo = store.state.user;
-  if (!data.userInfo.userId) {
+  // if (!data.userInfo.userId)
+  {
     let res = await me();
     if (res) {
       store.commit("user/setUser", res);
