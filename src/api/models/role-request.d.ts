@@ -85,7 +85,6 @@ export interface RoleRequest {
     'state'?: RoleRequestStateEnum;
 }
 
-// @ts-ignore
 export const RoleRequestToEnum = {
     Personal: 'Personal',
     Business: 'Business',
@@ -93,7 +92,6 @@ export const RoleRequestToEnum = {
 } as const;
 
 export type RoleRequestToEnum = typeof RoleRequestToEnum[keyof typeof RoleRequestToEnum];
-// @ts-ignore
 export const RoleRequestStateEnum = {
     Unprocessed: 'Unprocessed',
     Permit: 'Permit',

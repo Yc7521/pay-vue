@@ -17,20 +17,26 @@
 /**
  * 
  * @export
- * @interface LoginVm
+ * @interface RoleReq
  */
-export interface LoginVm {
+export interface RoleReq {
     /**
      * 
      * @type {string}
-     * @memberof LoginVm
+     * @memberof RoleReq
      */
-    'username': string;
+    'name': string;
     /**
      * 
      * @type {string}
-     * @memberof LoginVm
+     * @memberof RoleReq
      */
-    'password': string;
+    'idCard': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoleReq
+     */
+    'remarks'?: string;
 }
 

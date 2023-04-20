@@ -34,13 +34,13 @@ export interface PageRoleRequest {
      * @type {number}
      * @memberof PageRoleRequest
      */
-    'totalElements'?: number;
+    'totalPages'?: number;
     /**
      * 
      * @type {number}
      * @memberof PageRoleRequest
      */
-    'totalPages'?: number;
+    'totalElements'?: number;
     /**
      * 
      * @type {number}

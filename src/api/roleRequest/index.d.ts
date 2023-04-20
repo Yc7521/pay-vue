@@ -8,14 +8,11 @@ import { RoleRequest } from "../models";
 /**
  *
  * @summary Apply for a role.
- * @param {RequestReq} [requestReq]
+ * @param {RoleReq} [roleReq]
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-declare function apply(
-  requestReq?: RequestReq,
-  options?: {}
-): Promise<RoleRequest>;
+declare function apply(roleReq?: RoleReq, options?: {}): Promise<RoleRequest>;
 
 /**
  *
@@ -33,7 +30,7 @@ declare function approve(id: number, options?: {}): Promise<RoleRequest>;
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-declare function get1(id: number, options?: {}): Promise<RoleRequest>;
+declare function getRoleRequest(id: number, options?: {}): Promise<RoleRequest>;
 
 /**
  *
@@ -43,7 +40,7 @@ declare function get1(id: number, options?: {}): Promise<RoleRequest>;
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-declare function list1(
+declare function listRoleRequest(
   page?: number,
   size?: number,
   options?: {}

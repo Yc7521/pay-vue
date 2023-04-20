@@ -100,7 +100,7 @@ export function genReceiptCode(money = null, options = {}) {
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function get(id, options = {}) {
+export function getInfo(id, options = {}) {
   const path = `/api/user/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))

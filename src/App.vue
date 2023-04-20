@@ -9,7 +9,7 @@ const data = reactive({
     { name: "Register", path: "/register" },
     { name: "Show", path: "/pay/show" },
     { name: "Scan", path: "/pay/scan" },
-    { name: "User", path: "/user" },
+    { name: "User", path: "/user/info" },
     { name: "Cookie Shop", path: "/test" },
   ],
 });
@@ -19,7 +19,6 @@ const show_nav = ref(true);
 if (window.innerWidth > 768) {
   // show_nav.value = false;
 }
-
 </script>
 
 <template>

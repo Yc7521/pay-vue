@@ -34,13 +34,13 @@ export interface PageTradingCodeVm {
      * @type {number}
      * @memberof PageTradingCodeVm
      */
-    'totalElements'?: number;
+    'totalPages'?: number;
     /**
      * 
      * @type {number}
      * @memberof PageTradingCodeVm
      */
-    'totalPages'?: number;
+    'totalElements'?: number;
     /**
      * 
      * @type {number}

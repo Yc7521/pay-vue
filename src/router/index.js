@@ -27,8 +27,18 @@ const routes = [
   },
   {
     path: "/user",
-    name: "user",
-    component: () => import("../views/user/UserView.vue"),
+    children: [
+      {
+        path: "info",
+        name: "user",
+        component: () => import("../views/user/UserView.vue"),
+      },
+      {
+        path: "setting",
+        name: "setting",
+        component: () => import("../views/user/UserSetting.vue"),
+      },
+    ],
   },
   {
     path: "/test",

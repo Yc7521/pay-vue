@@ -1,6 +1,6 @@
 <script setup>
 import vueQr from "vue-qr/src/packages/vue-qr.vue";
-import { get2 } from "@/api/tradingCode/index";
+import { getTradingCode } from "@/api/tradingCode/index";
 import { genReceiptCode, me } from "@/api/user/info";
 import { onMounted } from "vue";
 import { ElMessage } from "element-plus";
@@ -91,7 +91,7 @@ watch(
 
 async function loop() {
   try {
-    let code = await get2(data.code.id);
+    let code = await getTradingCode(data.code.id);
     switch (code.state) {
       case "Created":
         data.message = "用户已扫码，请点击支付。";

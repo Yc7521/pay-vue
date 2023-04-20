@@ -70,7 +70,7 @@ declare function genReceiptCode(
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function get(id: number, options?: {}): Promise<UserInfo>;
+declare function getInfo(id: number, options?: {}): Promise<UserInfo>;
 
 /**
  *

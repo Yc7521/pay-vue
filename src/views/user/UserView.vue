@@ -42,17 +42,39 @@ async function doLogout() {
 </script>
 
 <template>
-  <div></div>
-  <div>
-    <div>
-      Hello, {{ data.userInfo.nickname }}
-      <el-tag class="cursor-pointer" size="small" round @click="doLogout">
-        Logout
-      </el-tag>
-    </div>
-    <div>Type: {{ data.userInfo.userType }}</div>
-  </div>
-  <div>money: {{ data.userInfo.money }}</div>
+  <el-space direction="vertical" fill class="text-left">
+    <el-card>
+      <template #header>
+        <el-image src="#" />
+      </template>
+      <div>
+        Hello, {{ data.userInfo.nickname }}
+        <el-tag class="cursor-pointer" size="small" round @click="doLogout">
+          Logout
+        </el-tag>
+      </div>
+      <div>Type: {{ data.userInfo.userType }}</div>
+    </el-card>
+    <el-space direction="vertical" fill class="text-left">
+      <div
+        style="
+          border-radius: var(--el-border-radius-base);
+          box-shadow: var(--el-box-shadow-light);
+        "
+      >
+        money: {{ data.userInfo.money }}
+      </div>
+      <div
+        style="
+          border-radius: var(--el-border-radius-base);
+          box-shadow: var(--el-box-shadow-light);
+        "
+      >
+        <router-link to="/user/setting">Setting</router-link>
+      </div>
+    </el-space>
+  </el-space>
+
   <h2 class="mt-3">Payment History</h2>
   <el-table :data="data.payments.content">
     <el-table-column prop="id" label="id" />

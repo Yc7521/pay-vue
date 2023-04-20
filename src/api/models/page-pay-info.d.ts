@@ -34,13 +34,13 @@ export interface PagePayInfo {
      * @type {number}
      * @memberof PagePayInfo
      */
-    'totalElements'?: number;
+    'totalPages'?: number;
     /**
      * 
      * @type {number}
      * @memberof PagePayInfo
      */
-    'totalPages'?: number;
+    'totalElements'?: number;
     /**
      * 
      * @type {number}

@@ -17,20 +17,14 @@
 /**
  * 
  * @export
- * @interface LoginVm
+ * @interface SecretLoginVm
  */
-export interface LoginVm {
+export interface SecretLoginVm {
     /**
      * 
      * @type {string}
-     * @memberof LoginVm
+     * @memberof SecretLoginVm
      */
-    'username': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LoginVm
-     */
-    'password': string;
+    'key': string;
 }
 

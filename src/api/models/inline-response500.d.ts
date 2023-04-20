@@ -25,13 +25,13 @@ export interface InlineResponse500 {
      * @type {string}
      * @memberof InlineResponse500
      */
-    'msg'?: string;
+    'message'?: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof InlineResponse500
      */
-    'stack'?: Array<string>;
+    'stack'?: Array<string> | null;
     /**
      * 
      * @type {string}

@@ -6,7 +6,7 @@ import request from "@/utils/request";
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function _delete(id, options = {}) {
+export function deleteUser(id, options = {}) {
   const path = `/api/user/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -24,7 +24,7 @@ export function _delete(id, options = {}) {
 /**
  *
  * @summary Login.
- * @param {LoginVm} [loginVm]
+ * @param {LoginVm | SecretLoginVM} [loginVm]
  * @param {*} [options] Override http request option.
  */
 export function login(loginVm = null, options = {}) {

@@ -3,10 +3,10 @@ import request from "@/utils/request";
 /**
  *
  * @summary Apply for a role.
- * @param {RequestReq} [requestReq]
+ * @param {RoleReq} [roleReq]
  * @param {*} [options] Override http request option.
  */
-export function apply(requestReq = null, options = {}) {
+export function apply(roleReq = null, options = {}) {
   const path = `/api/request/role`;
   const params = {};
 
@@ -14,7 +14,7 @@ export function apply(requestReq = null, options = {}) {
     url: path,
     method: "POST",
     params,
-    data: requestReq,
+    data: roleReq,
     ...options,
   });
 }
@@ -44,7 +44,7 @@ export function approve(id, options = {}) {
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function get1(id, options = {}) {
+export function getRoleRequest(id, options = {}) {
   const path = `/api/request/role/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -65,7 +65,7 @@ export function get1(id, options = {}) {
  * @param {number} [size]
  * @param {*} [options] Override http request option.
  */
-export function list1(page = null, size = null, options = {}) {
+export function listRoleRequest(page = null, size = null, options = {}) {
   const path = `/api/request/role`;
   const params = {
     page,

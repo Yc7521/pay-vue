@@ -13,30 +13,39 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { UserInfo } from './user-info';
 
 /**
  * 
  * @export
- * @interface RequestReq
+ * @interface SecretKey
  */
-export interface RequestReq {
+export interface SecretKey {
     /**
      * 
      * @type {string}
-     * @memberof RequestReq
+     * @memberof SecretKey
      */
-    'name': string;
+    'key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof RequestReq
+     * @memberof SecretKey
      */
-    'idCard': string;
+    'username'?: string;
     /**
      * 
      * @type {string}
-     * @memberof RequestReq
+     * @memberof SecretKey
      */
-    'remarks'?: string;
+    'expired'?: string;
+    /**
+     * 
+     * @type {UserInfo}
+     * @memberof SecretKey
+     */
+    'userInfo'?: UserInfo;
 }
 

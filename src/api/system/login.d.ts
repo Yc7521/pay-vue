@@ -12,7 +12,7 @@ import { UserAccount } from "../models";
  * @param {*} [options] Override http request option.
  * @memberof ApiSystemApiInterface
  */
-declare function _delete(id: number, options?: {}): Promise<object>;
+declare function deleteUser(id: number, options?: {}): Promise<object>;
 
 /**
  *

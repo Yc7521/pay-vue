@@ -8,44 +8,6 @@ import { TradingCodeVm } from "../models";
 /**
  *
  * @summary Remove a TradingCode by id if it\'s Finished.
- * @param {number} id
- * @param {*} [options] Override http request option.
- * @memberof ApiTradingCodeApiInterface
- */
-declare function checkAndRemove(id: number, options?: {}): Promise<object>;
-
-/**
- *
- * @summary Get a TradingCode by id.
- * @param {number} id
- * @param {*} [options] Override http request option.
- * @memberof ApiTradingCodeApiInterface
- */
-declare function get2(id: number, options?: {}): Promise<TradingCode>;
-
-/**
- *
- * @summary List TradingCode by userId.
- * @param {number} userId
- * @param {*} [options] Override http request option.
- * @memberof ApiTradingCodeApiInterface
- */
-declare function getByUserId(
-  userId: number,
-  options?: {}
-): Promise<TradingCodeVm>;
-
-/**
- *
- * @summary Gen id, only test for admin users.
- * @param {*} [options] Override http request option.
- * @memberof ApiTradingCodeApiInterface
- */
-declare function getId(options?: {}): Promise<number>;
-
-/**
- *
- * @summary Remove a TradingCode by id if it\'s Finished.
  * @param {string} id
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
@@ -59,7 +21,7 @@ declare function checkAndRemove(id: string, options?: {}): Promise<object>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function get2(id: string, options?: {}): Promise<TradingCode>;
+declare function getTradingCode(id: string, options?: {}): Promise<TradingCode>;
 
 /**
  *
@@ -68,7 +30,7 @@ declare function get2(id: string, options?: {}): Promise<TradingCode>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function getByUserId(
+declare function getTradingCodeByUserId(
   userId: number,
   options?: {}
 ): Promise<TradingCodeVm>;
@@ -98,7 +60,7 @@ declare function has(id: string, options?: {}): Promise<object>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function list2(
+declare function listTradingCode(
   page?: number,
   size?: number,
   options?: {}

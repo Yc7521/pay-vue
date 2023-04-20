@@ -26,7 +26,7 @@ export function checkAndRemove(id, options = {}) {
  * @param {string} id
  * @param {*} [options] Override http request option.
  */
-export function get2(id, options = {}) {
+export function getTradingCode(id, options = {}) {
   const path = `/api/code/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -46,7 +46,7 @@ export function get2(id, options = {}) {
  * @param {number} userId
  * @param {*} [options] Override http request option.
  */
-export function getByUserId(userId, options = {}) {
+export function getTradingCodeByUserId(userId, options = {}) {
   const path = `/api/code/user/{userId}`.replace(
     `{${"userId"}}`,
     encodeURIComponent(String(userId))
@@ -103,7 +103,7 @@ export function has(id, options = {}) {
  * @param {number} [size]
  * @param {*} [options] Override http request option.
  */
-export function list2(page = null, size = null, options = {}) {
+export function listTradingCode(page = null, size = null, options = {}) {
   const path = `/api/code`;
   const params = {
     page,
