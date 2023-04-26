@@ -12,7 +12,7 @@ import { UserAccount } from "../models";
  * @param {*} [options] Override http request option.
  * @memberof ApiSystemApiInterface
  */
-declare function deleteUser(id: number, options?: {}): Promise<object>;
+export declare function deleteUser(id: number, options?: {}): Promise<object>;
 
 /**
  *
@@ -21,7 +21,10 @@ declare function deleteUser(id: number, options?: {}): Promise<object>;
  * @param {*} [options] Override http request option.
  * @memberof ApiSystemApiInterface
  */
-declare function login(loginVm?: LoginVm | SecretLoginVM, options?: {}): Promise<LoginRes>;
+export declare function login(
+  loginVm?: LoginVm | SecretLoginVM,
+  options?: {}
+): Promise<LoginRes>;
 
 /**
  *
@@ -29,7 +32,7 @@ declare function login(loginVm?: LoginVm | SecretLoginVM, options?: {}): Promise
  * @param {*} [options] Override http request option.
  * @memberof ApiSystemApiInterface
  */
-declare function logout(options?: {}): Promise<string>;
+export declare function logout(options?: {}): Promise<string>;
 
 /**
  *
@@ -38,7 +41,7 @@ declare function logout(options?: {}): Promise<string>;
  * @param {*} [options] Override http request option.
  * @memberof ApiSystemApiInterface
  */
-declare function register(
+export declare function register(
   loginVm?: LoginVm,
   options?: {}
 ): Promise<UserAccount>;

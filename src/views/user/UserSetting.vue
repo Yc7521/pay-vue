@@ -4,6 +4,7 @@ import { useStore } from "vuex";
 import { changePassword, me } from "@/api/user/info";
 import { updateNickname } from "@/api/user/info";
 
+const fullScreenDialog = true;
 const router = useRouter();
 const store = useStore();
 
@@ -23,21 +24,23 @@ const password = reactive({
     newPassword2: "",
   },
 });
+const userType = ref("");
 
 onMounted(async () => {
-  const user = store.state.user;
-  nickname.data.nickname = user.nickname;
+  let user = store.state.user;
   if (!user.userId) {
     let res = await me();
     if (res) {
       store.commit("user/setUser", res);
-      nickname.data.nickname = res.nickname;
+      user = res;
     } else {
       await router.push({
         name: "login",
       });
     }
   }
+  nickname.data.nickname = user.nickname;
+  userType.value = user.userType;
 });
 
 function showNickname() {
@@ -80,17 +83,39 @@ function savePassword() {
   password.show = false;
   console.log("save password");
 }
+
+function toBusiness() {
+  // TODO:
+}
+
+function keyManagement() {
+  router.push({
+    name: "api-key",
+  });
+}
 </script>
 
 <template>
   <div>
     <el-space direction="vertical" fill>
-      <el-button @click="showNickname()" text>
+      <div @click="showNickname()" class="box">
         nickname: {{ nickname.data.nickname }}
-      </el-button>
-      <el-button @click="showPassword()" text> change password</el-button>
+      </div>
+      <div @click="showPassword()" class="box">change password</div>
+      <div @click="toBusiness()" class="box" v-if="userType === 'Personal'">
+        apply for the Business role
+      </div>
+      <div
+        @click="keyManagement()"
+        class="box"
+        v-else-if="userType === 'Business'"
+      >
+        api key management
+      </div>
+      <div class="box" v-else-if="userType === 'Admin'">Admin</div>
     </el-space>
-    <el-dialog v-model="nickname.show">
+
+    <el-dialog v-model="nickname.show" :fullscreen="fullScreenDialog">
       <h2>Change Nickname</h2>
       <el-form :model="nickname.data" label-width="120px">
         <el-form-item label="message" v-if="nickname.msg">
@@ -106,7 +131,7 @@ function savePassword() {
         <el-button type="primary" @click="saveNickname()">OK</el-button>
       </el-form>
     </el-dialog>
-    <el-dialog v-model="password.show">
+    <el-dialog v-model="password.show" :fullscreen="fullScreenDialog">
       <el-row>
         <el-col>
           <h2>Change Password</h2>
@@ -134,4 +159,10 @@ function savePassword() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.box {
+  text-align: start;
+  border-radius: var(--el-border-radius-base);
+  /*box-shadow: var(--el-box-shadow-light);*/
+}
+</style>

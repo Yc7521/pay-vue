@@ -1,7 +1,7 @@
 <script setup>
 import { login } from "@/api/system/login";
 import { setToken } from "@/utils/auth";
-import { me } from "@/api/user/info.js";
+import { me } from "@/api/user/info";
 import { useStore } from "vuex";
 
 const data = reactive({

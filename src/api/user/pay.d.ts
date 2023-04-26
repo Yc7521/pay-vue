@@ -1,9 +1,5 @@
 // @ts-ignore
-import { PagePayInfo } from "../models";
-// @ts-ignore
-import { PayInfo } from "../models";
-// @ts-ignore
-import { PayVm } from "../models";
+import { PagePayInfo, PayInfo, PayVm } from "../models";
 
 /**
  * Update PayInfo to cancel this payment
@@ -12,7 +8,7 @@ import { PayVm } from "../models";
  * @param {*} [options] Override http request option.
  * @memberof ApiUserPayApiInterface
  */
-declare function cancel(id: number, options?: {}): Promise<PayInfo>;
+export declare function cancel(id: number, options?: {}): Promise<PayInfo>;
 
 /**
  *
@@ -21,7 +17,10 @@ declare function cancel(id: number, options?: {}): Promise<PayInfo>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserPayApiInterface
  */
-declare function cancelWithCode(codeId: string, options?: {}): Promise<PayInfo>;
+export declare function cancelWithCode(
+  codeId: string,
+  options?: {}
+): Promise<PayInfo>;
 
 /**
  * Pay to user
@@ -30,7 +29,10 @@ declare function cancelWithCode(codeId: string, options?: {}): Promise<PayInfo>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserPayApiInterface
  */
-declare function createPayment(payVm?: PayVm, options?: {}): Promise<PayInfo>;
+export declare function createPayment(
+  payVm?: PayVm,
+  options?: {}
+): Promise<PayInfo>;
 
 /**
  *
@@ -40,7 +42,7 @@ declare function createPayment(payVm?: PayVm, options?: {}): Promise<PayInfo>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserPayApiInterface
  */
-declare function createPaymentWithCode(
+export declare function createPaymentWithCode(
   codeId: string,
   money?: number,
   options?: {}
@@ -54,7 +56,7 @@ declare function createPaymentWithCode(
  * @param {*} [options] Override http request option.
  * @memberof ApiUserPayApiInterface
  */
-declare function list(
+export declare function list(
   page?: number,
   size?: number,
   options?: {}
@@ -67,7 +69,7 @@ declare function list(
  * @param {*} [options] Override http request option.
  * @memberof ApiUserPayApiInterface
  */
-declare function pay(id: number, options?: {}): Promise<PayInfo>;
+export declare function pay(id: number, options?: {}): Promise<PayInfo>;
 
 /**
  *
@@ -76,4 +78,7 @@ declare function pay(id: number, options?: {}): Promise<PayInfo>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserPayApiInterface
  */
-declare function payWithCode(codeId: string, options?: {}): Promise<PayInfo>;
+export declare function payWithCode(
+  codeId: string,
+  options?: {}
+): Promise<PayInfo>;

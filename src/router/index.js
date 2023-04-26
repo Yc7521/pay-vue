@@ -31,12 +31,22 @@ const routes = [
       {
         path: "info",
         name: "user",
-        component: () => import("../views/user/UserView.vue"),
+        component: () => import("../views/user/UserInfo.vue"),
       },
       {
         path: "setting",
         name: "setting",
         component: () => import("../views/user/UserSetting.vue"),
+      },
+      {
+        path: "history",
+        name: "history",
+        component: () => import("../views/user/PayHistory.vue"),
+      },
+      {
+        path: "apikey",
+        name: "api-key",
+        component: () => import("../views/user/ApiKey.vue"),
       },
     ],
   },

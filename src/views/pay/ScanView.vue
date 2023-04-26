@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from "vue";
 import { QrStream, QrCapture } from "vue3-qr-reader";
 import {
   cancelWithCode,
@@ -177,7 +178,7 @@ const paintBoundingBox = (detectedCodes, ctx) => {
 
     <qr-stream
       class="stream"
-      v-show="data.stream"
+      v-if="data.stream"
       :torch="data.torch"
       :camera="data.camera"
       @decode="onDecode"

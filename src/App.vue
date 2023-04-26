@@ -24,16 +24,20 @@ if (window.innerWidth > 768) {
 <template>
   <nav v-if="show_nav">
     <el-space spacer="|" wrap>
-      <div v-for="{ name, path } in data.links" :key="path">
+      <template v-for="{ name, path } in data.links" :key="path">
         <router-link :to="path">{{ name }}</router-link>
-      </div>
+      </template>
       <UseDark v-slot="{ isDark, toggleDark }">
         <button @click="toggleDark()">Is Dark: {{ isDark }}</button>
       </UseDark>
     </el-space>
   </nav>
 
-  <router-view />
+  <el-container>
+    <!-- <el-header>Header</el-header> -->
+    <el-main><router-view /></el-main>
+    <el-footer>Footer</el-footer>
+  </el-container>
 </template>
 
 <style lang="less">
@@ -52,7 +56,7 @@ if (window.innerWidth > 768) {
 }
 
 nav {
-  padding: 30px;
+  padding: 0 30px 30px 30px;
 
   a {
     font-weight: bold;

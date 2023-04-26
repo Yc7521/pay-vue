@@ -1,9 +1,5 @@
 // @ts-ignore
-import { PageTradingCodeVm } from "../models";
-// @ts-ignore
-import { TradingCode } from "../models";
-// @ts-ignore
-import { TradingCodeVm } from "../models";
+import { PageTradingCodeVm, TradingCode, TradingCodeVm } from "../models";
 
 /**
  *
@@ -12,7 +8,10 @@ import { TradingCodeVm } from "../models";
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function checkAndRemove(id: string, options?: {}): Promise<object>;
+export declare function checkAndRemove(
+  id: string,
+  options?: {}
+): Promise<object>;
 
 /**
  *
@@ -21,7 +20,10 @@ declare function checkAndRemove(id: string, options?: {}): Promise<object>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function getTradingCode(id: string, options?: {}): Promise<TradingCode>;
+export declare function getTradingCode(
+  id: string,
+  options?: {}
+): Promise<TradingCode>;
 
 /**
  *
@@ -30,7 +32,7 @@ declare function getTradingCode(id: string, options?: {}): Promise<TradingCode>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function getTradingCodeByUserId(
+export declare function getTradingCodeByUserId(
   userId: number,
   options?: {}
 ): Promise<TradingCodeVm>;
@@ -41,7 +43,7 @@ declare function getTradingCodeByUserId(
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function getId(options?: {}): Promise<number>;
+export declare function getId(options?: {}): Promise<number>;
 
 /**
  *
@@ -50,7 +52,7 @@ declare function getId(options?: {}): Promise<number>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function has(id: string, options?: {}): Promise<object>;
+export declare function has(id: string, options?: {}): Promise<object>;
 
 /**
  *
@@ -60,7 +62,7 @@ declare function has(id: string, options?: {}): Promise<object>;
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function listTradingCode(
+export declare function listTradingCode(
   page?: number,
   size?: number,
   options?: {}
@@ -73,7 +75,7 @@ declare function listTradingCode(
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-declare function put(
+export declare function put(
   tradingCode?: TradingCode,
   options?: {}
 ): Promise<TradingCodeVm>;

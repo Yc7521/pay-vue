@@ -42,10 +42,10 @@ onMounted(async () => {
    */
   const token = await Promise.all([
     login({
-      key: "s1",
+      key: "6327269b245ab286f863e2411f37384b3e23",
     }),
     login({
-      key: "s2",
+      key: "0baafdf94a54a89bab21954506ea7e45e62c",
     }),
   ]);
   /**

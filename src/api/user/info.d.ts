@@ -1,11 +1,5 @@
 // @ts-ignore
-import { RequestReq } from "../models";
-// @ts-ignore
-import { RoleRequest } from "../models";
-// @ts-ignore
-import { TradingCodeVm } from "../models";
-// @ts-ignore
-import { UserInfo } from "../models";
+import { RequestReq, RoleRequest, TradingCodeVm, UserInfo } from "../models";
 
 /**
  *
@@ -15,7 +9,7 @@ import { UserInfo } from "../models";
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function applyForRole(
+export declare function applyForRole(
   role: string,
   requestReq?: RequestReq,
   options?: {}
@@ -29,7 +23,7 @@ declare function applyForRole(
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function changePassword(
+export declare function changePassword(
   oldPassword: string,
   newPassword: string,
   options?: {}
@@ -41,7 +35,7 @@ declare function changePassword(
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function deleteMe(options?: {}): Promise<object>;
+export declare function deleteMe(options?: {}): Promise<object>;
 
 /**
  *
@@ -49,7 +43,7 @@ declare function deleteMe(options?: {}): Promise<object>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function genPaymentCode(options?: {}): Promise<TradingCodeVm>;
+export declare function genPaymentCode(options?: {}): Promise<TradingCodeVm>;
 
 /**
  *
@@ -58,7 +52,7 @@ declare function genPaymentCode(options?: {}): Promise<TradingCodeVm>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function genReceiptCode(
+export declare function genReceiptCode(
   money?: number,
   options?: {}
 ): Promise<TradingCodeVm>;
@@ -70,7 +64,7 @@ declare function genReceiptCode(
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function getInfo(id: number, options?: {}): Promise<UserInfo>;
+export declare function getInfo(id: number, options?: {}): Promise<UserInfo>;
 
 /**
  *
@@ -78,7 +72,7 @@ declare function getInfo(id: number, options?: {}): Promise<UserInfo>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function me(options?: {}): Promise<UserInfo>;
+export declare function me(options?: {}): Promise<UserInfo>;
 
 /**
  *
@@ -87,7 +81,7 @@ declare function me(options?: {}): Promise<UserInfo>;
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-declare function updateNickname(
+export declare function updateNickname(
   nickname: string,
   options?: {}
 ): Promise<UserInfo>;
