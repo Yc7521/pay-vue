@@ -1,19 +1,31 @@
 // @ts-ignore
-import { RequestReq, RoleRequest, TradingCodeVm, UserInfo } from "../models";
+import { RoleReq, RoleRequest, TradingCodeVm, UserInfo } from "../models";
 
 /**
  *
  * @summary Apply for role.
  * @param {string} role
- * @param {RequestReq} [requestReq]
+ * @param {RoleReq} [roleReq]
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
 export declare function applyForRole(
   role: string,
-  requestReq?: RequestReq,
+  roleReq?: RoleReq,
   options?: {}
 ): Promise<RoleRequest>;
+
+/**
+ *
+ * @summary Update the nickname of current user.
+ * @param {string} nickname
+ * @param {*} [options] Override http request option.
+ * @memberof ApiUserInfoApiInterface
+ */
+export declare function changeNickname(
+  nickname: string,
+  options?: {}
+): Promise<UserInfo>;
 
 /**
  *
@@ -64,7 +76,10 @@ export declare function genReceiptCode(
  * @param {*} [options] Override http request option.
  * @memberof ApiUserInfoApiInterface
  */
-export declare function getInfo(id: number, options?: {}): Promise<UserInfo>;
+export declare function getUserInfo(
+  id: number,
+  options?: {}
+): Promise<UserInfo>;
 
 /**
  *
@@ -73,15 +88,3 @@ export declare function getInfo(id: number, options?: {}): Promise<UserInfo>;
  * @memberof ApiUserInfoApiInterface
  */
 export declare function me(options?: {}): Promise<UserInfo>;
-
-/**
- *
- * @summary Update the nickname of current user.
- * @param {string} nickname
- * @param {*} [options] Override http request option.
- * @memberof ApiUserInfoApiInterface
- */
-export declare function updateNickname(
-  nickname: string,
-  options?: {}
-): Promise<UserInfo>;

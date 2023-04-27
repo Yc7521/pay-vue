@@ -6,7 +6,7 @@ import request from "@/utils/request";
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function cancel(id, options = {}) {
+export function cancelPay(id, options = {}) {
   const path = `/api/user/me/pay/{id}/cancel`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -20,13 +20,14 @@ export function cancel(id, options = {}) {
     ...options,
   });
 }
+
 /**
- *
- * @summary /api/user/me/pay/code/{codeId}/cancel
+ * Update PayInfo to cancel this payment by trading code
+ * @summary Cancel.
  * @param {string} codeId
  * @param {*} [options] Override http request option.
  */
-export function cancelWithCode(codeId, options = {}) {
+export function cancelPayCode(codeId, options = {}) {
   const path = `/api/user/me/pay/code/{codeId}/cancel`.replace(
     `{${"codeId"}}`,
     encodeURIComponent(String(codeId))
@@ -40,13 +41,56 @@ export function cancelWithCode(codeId, options = {}) {
     ...options,
   });
 }
+
+/**
+ * Update PayInfo and UserInfo to finish this payment
+ * @summary Pay.
+ * @param {number} id
+ * @param {*} [options] Override http request option.
+ */
+export function confirmPay(id, options = {}) {
+  const path = `/api/user/me/pay/{id}`.replace(
+    `{${"id"}}`,
+    encodeURIComponent(String(id))
+  );
+  const params = {};
+
+  return request({
+    url: path,
+    method: "PUT",
+    params,
+    ...options,
+  });
+}
+
+/**
+ * Update PayInfo and UserInfo to finish this payment by trading code
+ * @summary Pay.
+ * @param {string} codeId
+ * @param {*} [options] Override http request option.
+ */
+export function confirmPayCode(codeId, options = {}) {
+  const path = `/api/user/me/pay/code/{codeId}`.replace(
+    `{${"codeId"}}`,
+    encodeURIComponent(String(codeId))
+  );
+  const params = {};
+
+  return request({
+    url: path,
+    method: "PUT",
+    params,
+    ...options,
+  });
+}
+
 /**
  * Pay to user
  * @summary Create PayInfo by userId.
  * @param {PayVm} [payVm]
  * @param {*} [options] Override http request option.
  */
-export function createPayment(payVm = null, options = {}) {
+export function createPayToUser(payVm = null, options = {}) {
   const path = `/api/user/me/pay/user`;
   const params = {};
 
@@ -58,14 +102,15 @@ export function createPayment(payVm = null, options = {}) {
     ...options,
   });
 }
+
 /**
- *
- * @summary /api/user/me/pay/code/{codeId}
+ * Pay to user
+ * @summary Create PayInfo with trading code.
  * @param {string} codeId
  * @param {number} [money]
  * @param {*} [options] Override http request option.
  */
-export function createPaymentWithCode(codeId, money = null, options = {}) {
+export function createPayWithCode(codeId, money = null, options = {}) {
   const path = `/api/user/me/pay/code/{codeId}`.replace(
     `{${"codeId"}}`,
     encodeURIComponent(String(codeId))
@@ -81,6 +126,7 @@ export function createPaymentWithCode(codeId, money = null, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary List all PayInfo.
@@ -88,7 +134,7 @@ export function createPaymentWithCode(codeId, money = null, options = {}) {
  * @param {number} [size]
  * @param {*} [options] Override http request option.
  */
-export function list(page = null, size = null, options = {}) {
+export function listPayInfo(page = null, size = null, options = {}) {
   const path = `/api/user/me/pay`;
   const params = {
     page,
@@ -98,46 +144,6 @@ export function list(page = null, size = null, options = {}) {
   return request({
     url: path,
     method: "GET",
-    params,
-    ...options,
-  });
-}
-/**
- * Update PayInfo and UserInfo to finish this payment
- * @summary Pay.
- * @param {number} id
- * @param {*} [options] Override http request option.
- */
-export function pay(id, options = {}) {
-  const path = `/api/user/me/pay/{id}`.replace(
-    `{${"id"}}`,
-    encodeURIComponent(String(id))
-  );
-  const params = {};
-
-  return request({
-    url: path,
-    method: "PUT",
-    params,
-    ...options,
-  });
-}
-/**
- *
- * @summary /api/user/me/pay/code/{codeId}
- * @param {string} codeId
- * @param {*} [options] Override http request option.
- */
-export function payWithCode(codeId, options = {}) {
-  const path = `/api/user/me/pay/code/{codeId}`.replace(
-    `{${"codeId"}}`,
-    encodeURIComponent(String(codeId))
-  );
-  const params = {};
-
-  return request({
-    url: path,
-    method: "PUT",
     params,
     ...options,
   });

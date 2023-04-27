@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from "vue";
 import { register } from "@/api/system/login";
 
 const data = reactive({

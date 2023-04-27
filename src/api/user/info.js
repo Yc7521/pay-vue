@@ -4,10 +4,10 @@ import request from "@/utils/request";
  *
  * @summary Apply for role.
  * @param {string} role
- * @param {RequestReq} [requestReq]
+ * @param {RoleReq} [roleReq]
  * @param {*} [options] Override http request option.
  */
-export function applyForRole(role, requestReq = null, options = {}) {
+export function applyForRole(role, roleReq = null, options = {}) {
   const path = `/api/user/me/to/{role}`.replace(
     `{${"role"}}`,
     encodeURIComponent(String(role))
@@ -18,10 +18,31 @@ export function applyForRole(role, requestReq = null, options = {}) {
     url: path,
     method: "POST",
     params,
-    data: requestReq,
+    data: roleReq,
     ...options,
   });
 }
+
+/**
+ *
+ * @summary Update the nickname of current user.
+ * @param {string} nickname
+ * @param {*} [options] Override http request option.
+ */
+export function changeNickname(nickname, options = {}) {
+  const path = `/api/user/me`;
+  const params = {
+    nickname,
+  };
+
+  return request({
+    url: path,
+    method: "PUT",
+    params,
+    ...options,
+  });
+}
+
 /**
  *
  * @summary Change the password of current user.
@@ -43,6 +64,7 @@ export function changePassword(oldPassword, newPassword, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Delete current user.
@@ -59,6 +81,7 @@ export function deleteMe(options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Gen payment code.
@@ -75,6 +98,7 @@ export function genPaymentCode(options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Gen receipt code.
@@ -94,13 +118,14 @@ export function genReceiptCode(money = null, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Get user info by user id.
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function getInfo(id, options = {}) {
+export function getUserInfo(id, options = {}) {
   const path = `/api/user/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -114,6 +139,7 @@ export function getInfo(id, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Get user info by current user.
@@ -126,25 +152,6 @@ export function me(options = {}) {
   return request({
     url: path,
     method: "GET",
-    params,
-    ...options,
-  });
-}
-/**
- *
- * @summary Update the nickname of current user.
- * @param {string} nickname
- * @param {*} [options] Override http request option.
- */
-export function updateNickname(nickname, options = {}) {
-  const path = `/api/user/me`;
-  const params = {
-    nickname,
-  };
-
-  return request({
-    url: path,
-    method: "PUT",
     params,
     ...options,
   });

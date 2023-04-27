@@ -1,8 +1,8 @@
 <script setup>
 import { reactive } from "vue";
 import { useStore } from "vuex";
-import { createForMe, getSecretKeyForMe } from "@/api/system/apikey";
 import { ElMessageBox } from "element-plus";
+import { createApiKeyForMe, listApiKeyForMe } from "@/api/system/apikey";
 
 const name = "ApiKey";
 const fullScreenDialog = true;
@@ -25,7 +25,7 @@ onMounted(async () => {
     });
   }
   data.userId = user.userId;
-  data.keys = await getSecretKeyForMe();
+  data.keys = await listApiKeyForMe();
 });
 
 function toDateStr(date) {
@@ -48,7 +48,7 @@ async function apply() {
     return;
   }
   let expired = toDateStr(data.expired);
-  let key = await createForMe({
+  let key = await createApiKeyForMe({
     expired: expired,
   });
   data.keys.push(key);

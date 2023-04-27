@@ -7,7 +7,7 @@ import request from "@/utils/request";
  * @param {SecretKey} [secretKey]
  * @param {*} [options] Override http request option.
  */
-export function create(id, secretKey = null, options = {}) {
+export function createApiKey(id, secretKey = null, options = {}) {
   const path = `/api/request/secret/user/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -29,7 +29,7 @@ export function create(id, secretKey = null, options = {}) {
  * @param {SecretReqVm} [secretReqVm]
  * @param {*} [options] Override http request option.
  */
-export function createForMe(secretReqVm = null, options = {}) {
+export function createApiKeyForMe(secretReqVm = null, options = {}) {
   const path = `/api/request/secret/user/me`;
   const params = {};
 
@@ -48,7 +48,7 @@ export function createForMe(secretReqVm = null, options = {}) {
  * @param {string} key
  * @param {*} [options] Override http request option.
  */
-export function deleteSecretKey(key, options = {}) {
+export function deleteApiKey(key, options = {}) {
   const path = `/api/request/secret/{key}`.replace(
     `{${"key"}}`,
     encodeURIComponent(String(key))
@@ -67,6 +67,7 @@ export function deleteSecretKey(key, options = {}) {
  *
  * @summary Test for admin.
  * @param {*} [options] Override http request option.
+ * @deprecated
  */
 export function generateSecretKeyTest(options = {}) {
   const path = `/api/request/secret/test`;
@@ -86,7 +87,7 @@ export function generateSecretKeyTest(options = {}) {
  * @param {string} key
  * @param {*} [options] Override http request option.
  */
-export function getSecretKey(key, options = {}) {
+export function getApiKey(key, options = {}) {
   const path = `/api/request/secret/{key}`.replace(
     `{${"key"}}`,
     encodeURIComponent(String(key))
@@ -103,32 +104,15 @@ export function getSecretKey(key, options = {}) {
 
 /**
  *
- * @summary Get a SecretKey by user id.
+ * @summary List SecretKeys by user id.
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function getSecretKeyByUserId(id, options = {}) {
+export function getApiKeyByUserId(id, options = {}) {
   const path = `/api/request/secret/user/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
   );
-  const params = {};
-
-  return request({
-    url: path,
-    method: "GET",
-    params,
-    ...options,
-  });
-}
-
-/**
- *
- * @summary Get a SecretKey by user id.
- * @param {*} [options] Override http request option.
- */
-export function getSecretKeyForMe(options = {}) {
-  const path = `/api/request/secret/user/me`;
   const params = {};
 
   return request({
@@ -146,12 +130,29 @@ export function getSecretKeyForMe(options = {}) {
  * @param {number} [size]
  * @param {*} [options] Override http request option.
  */
-export function listSecretKey(page = null, size = null, options = {}) {
+export function listApiKey(page = null, size = null, options = {}) {
   const path = `/api/request/secret`;
   const params = {
     page,
     size,
   };
+
+  return request({
+    url: path,
+    method: "GET",
+    params,
+    ...options,
+  });
+}
+
+/**
+ *
+ * @summary List SecretKeys for current user.
+ * @param {*} [options] Override http request option.
+ */
+export function listApiKeyForMe(options = {}) {
+  const path = `/api/request/secret/user/me`;
+  const params = {};
 
   return request({
     url: path,

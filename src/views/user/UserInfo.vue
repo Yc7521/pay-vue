@@ -1,8 +1,8 @@
 <script setup>
-import { useStore } from "vuex";
 import { reactive } from "vue";
-import { me } from "@/api/user/info";
+import { useStore } from "vuex";
 import { removeToken } from "@/utils/auth.js";
+import { me } from "@/api/user/info";
 
 const data = reactive({
   userInfo: {},

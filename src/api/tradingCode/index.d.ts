@@ -3,15 +3,12 @@ import { PageTradingCodeVm, TradingCode, TradingCodeVm } from "../models";
 
 /**
  *
- * @summary Remove a TradingCode by id if it\'s Finished.
- * @param {string} id
+ * @summary Gen id, only test for admin users.
  * @param {*} [options] Override http request option.
+ * @deprecated
  * @memberof ApiTradingCodeApiInterface
  */
-export declare function checkAndRemove(
-  id: string,
-  options?: {}
-): Promise<object>;
+export declare function genTradingCodeIdTest(options?: {}): Promise<string>;
 
 /**
  *
@@ -27,32 +24,27 @@ export declare function getTradingCode(
 
 /**
  *
+ * @summary Exist a TradingCode with id.
+ * @param {string} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
+ */
+export declare function hasTradingCode(
+  id: string,
+  options?: {}
+): Promise<object>;
+
+/**
+ *
  * @summary List TradingCode by userId.
  * @param {number} userId
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-export declare function getTradingCodeByUserId(
+export declare function listRoleRequestByUserId(
   userId: number,
   options?: {}
-): Promise<TradingCodeVm>;
-
-/**
- *
- * @summary Gen id, only test for admin users.
- * @param {*} [options] Override http request option.
- * @memberof ApiTradingCodeApiInterface
- */
-export declare function getId(options?: {}): Promise<number>;
-
-/**
- *
- * @summary Exist a TradingCode by id.
- * @param {string} id
- * @param {*} [options] Override http request option.
- * @memberof ApiTradingCodeApiInterface
- */
-export declare function has(id: string, options?: {}): Promise<object>;
+): Promise<Array<TradingCodeVm>>;
 
 /**
  *
@@ -70,12 +62,24 @@ export declare function listTradingCode(
 
 /**
  *
+ * @summary Remove a TradingCode by id if it\'s Finished.
+ * @param {string} id
+ * @param {*} [options] Override http request option.
+ * @memberof ApiTradingCodeApiInterface
+ */
+export declare function removeTradingCode(
+  id: string,
+  options?: {}
+): Promise<object>;
+
+/**
+ *
  * @summary Submit a TradingCode.
  * @param {TradingCode} [tradingCode]
  * @param {*} [options] Override http request option.
  * @memberof ApiTradingCodeApiInterface
  */
-export declare function put(
+export declare function updateTradingCode(
   tradingCode?: TradingCode,
   options?: {}
 ): Promise<TradingCodeVm>;

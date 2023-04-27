@@ -6,7 +6,7 @@ import request from "@/utils/request";
  * @param {RoleReq} [roleReq]
  * @param {*} [options] Override http request option.
  */
-export function apply(roleReq = null, options = {}) {
+export function applyRoleRequest(roleReq = null, options = {}) {
   const path = `/api/request/role`;
   const params = {};
 
@@ -18,13 +18,14 @@ export function apply(roleReq = null, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Approve a RoleRequest by id.
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function approve(id, options = {}) {
+export function approveRoleRequest(id, options = {}) {
   const path = `/api/request/role/{id}/approve`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -38,6 +39,7 @@ export function approve(id, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Get a RoleRequest by id.
@@ -58,6 +60,7 @@ export function getRoleRequest(id, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary List all RoleRequest.
@@ -79,6 +82,7 @@ export function listRoleRequest(page = null, size = null, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary List RoleRequest by applicantId.
@@ -87,7 +91,7 @@ export function listRoleRequest(page = null, size = null, options = {}) {
  * @param {number} [size]
  * @param {*} [options] Override http request option.
  */
-export function listByApplicantId(
+export function listRoleRequestByApplicantId(
   applicantId,
   page = null,
   size = null,
@@ -109,6 +113,7 @@ export function listByApplicantId(
     ...options,
   });
 }
+
 /**
  *
  * @summary List RoleRequest by state.
@@ -117,7 +122,12 @@ export function listByApplicantId(
  * @param {number} [size]
  * @param {*} [options] Override http request option.
  */
-export function listByState(state, page = null, size = null, options = {}) {
+export function listRoleRequestByState(
+  state,
+  page = null,
+  size = null,
+  options = {}
+) {
   const path = `/api/request/role/state/{state}`.replace(
     `{${"state"}}`,
     encodeURIComponent(String(state))
@@ -134,13 +144,14 @@ export function listByState(state, page = null, size = null, options = {}) {
     ...options,
   });
 }
+
 /**
  *
  * @summary Reject a RoleRequest by id.
  * @param {number} id
  * @param {*} [options] Override http request option.
  */
-export function reject(id, options = {}) {
+export function rejectRoleRequest(id, options = {}) {
   const path = `/api/request/role/{id}/reject`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))

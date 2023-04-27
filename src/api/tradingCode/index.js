@@ -2,24 +2,22 @@ import request from "@/utils/request";
 
 /**
  *
- * @summary Remove a TradingCode by id if it\'s Finished.
- * @param {string} id
+ * @summary Gen id, only test for admin users.
  * @param {*} [options] Override http request option.
+ * @deprecated
  */
-export function checkAndRemove(id, options = {}) {
-  const path = `/api/code/{id}`.replace(
-    `{${"id"}}`,
-    encodeURIComponent(String(id))
-  );
+export function genTradingCodeIdTest(options = {}) {
+  const path = `/api/code/getId`;
   const params = {};
 
   return request({
     url: path,
-    method: "DELETE",
+    method: "GET",
     params,
     ...options,
   });
 }
+
 /**
  *
  * @summary Get a TradingCode by id.
@@ -40,49 +38,14 @@ export function getTradingCode(id, options = {}) {
     ...options,
   });
 }
-/**
- *
- * @summary List TradingCode by userId.
- * @param {number} userId
- * @param {*} [options] Override http request option.
- */
-export function getTradingCodeByUserId(userId, options = {}) {
-  const path = `/api/code/user/{userId}`.replace(
-    `{${"userId"}}`,
-    encodeURIComponent(String(userId))
-  );
-  const params = {};
 
-  return request({
-    url: path,
-    method: "GET",
-    params,
-    ...options,
-  });
-}
 /**
  *
- * @summary Gen id, only test for admin users.
- * @param {*} [options] Override http request option.
- */
-export function getId(options = {}) {
-  const path = `/api/code/getId`;
-  const params = {};
-
-  return request({
-    url: path,
-    method: "GET",
-    params,
-    ...options,
-  });
-}
-/**
- *
- * @summary Exist a TradingCode by id.
+ * @summary Exist a TradingCode with id.
  * @param {string} id
  * @param {*} [options] Override http request option.
  */
-export function has(id, options = {}) {
+export function hasTradingCode(id, options = {}) {
   const path = `/api/code/has/{id}`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
@@ -96,6 +59,28 @@ export function has(id, options = {}) {
     ...options,
   });
 }
+
+/**
+ *
+ * @summary List TradingCode by userId.
+ * @param {number} userId
+ * @param {*} [options] Override http request option.
+ */
+export function listRoleRequestByUserId(userId, options = {}) {
+  const path = `/api/code/user/{userId}`.replace(
+    `{${"userId"}}`,
+    encodeURIComponent(String(userId))
+  );
+  const params = {};
+
+  return request({
+    url: path,
+    method: "GET",
+    params,
+    ...options,
+  });
+}
+
 /**
  *
  * @summary List all TradingCode.
@@ -117,13 +102,35 @@ export function listTradingCode(page = null, size = null, options = {}) {
     ...options,
   });
 }
+
+/**
+ *
+ * @summary Remove a TradingCode by id if it\'s Finished.
+ * @param {string} id
+ * @param {*} [options] Override http request option.
+ */
+export function removeTradingCode(id, options = {}) {
+  const path = `/api/code/{id}`.replace(
+    `{${"id"}}`,
+    encodeURIComponent(String(id))
+  );
+  const params = {};
+
+  return request({
+    url: path,
+    method: "DELETE",
+    params,
+    ...options,
+  });
+}
+
 /**
  *
  * @summary Submit a TradingCode.
  * @param {TradingCode} [tradingCode]
  * @param {*} [options] Override http request option.
  */
-export function put(tradingCode = null, options = {}) {
+export function updateTradingCode(tradingCode = null, options = {}) {
   const path = `/api/code`;
   const params = {};
 

@@ -1,9 +1,9 @@
 <script setup>
+import { reactive, onMounted } from "vue";
 import vueQr from "vue-qr/src/packages/vue-qr.vue";
+import { ElMessage } from "element-plus";
 import { getTradingCode } from "@/api/tradingCode/index";
 import { genReceiptCode, me } from "@/api/user/info";
-import { onMounted } from "vue";
-import { ElMessage } from "element-plus";
 import { login } from "@/api/system/login";
 
 const data = reactive({

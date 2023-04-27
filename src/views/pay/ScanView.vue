@@ -1,13 +1,13 @@
 <script setup>
 import { reactive } from "vue";
 import { QrStream, QrCapture } from "vue3-qr-reader";
-import {
-  cancelWithCode,
-  createPaymentWithCode,
-  payWithCode,
-} from "@/api/user/pay";
 import { ElMessage, ElMessageBox } from "element-plus";
-import { has } from "@/api/tradingCode/index";
+import {
+  cancelPayCode,
+  createPayWithCode,
+  confirmPayCode,
+} from "@/api/user/pay";
+import { hasTradingCode } from "@/api/tradingCode/index";
 // import { changePassword } from "@/api/user/info.js";
 
 const data = reactive({
@@ -61,7 +61,7 @@ onUnmounted(() => {
 
 async function hasCode({ id }) {
   try {
-    await has(id);
+    await hasTradingCode(id);
     data.message += `服务器存在此二维码\n`;
     return true;
   } catch (e) {
@@ -79,7 +79,7 @@ watch(
       if (id && userInfoId && tradingType) {
         if (await hasCode(val)) {
           if (tradingType === "Receipt") {
-            let payment = await createPaymentWithCode(id, money);
+            let payment = await createPayWithCode(id, money);
             try {
               let res = await ElMessageBox.confirm(
                 `向${payment.receivingUser.nickname}付款${payment.money}元`,
@@ -92,7 +92,7 @@ watch(
               );
               console.log("res", res);
               if (res === "confirm") {
-                await payWithCode(id);
+                await confirmPayCode(id);
                 ElMessage({
                   type: "success",
                   message: "付款成功!",
@@ -101,7 +101,7 @@ watch(
               }
             } catch (e) {
               if (e === "cancel") {
-                await cancelWithCode(id);
+                await cancelPayCode(id);
                 ElMessage({
                   type: "info",
                   message: "付款取消!",

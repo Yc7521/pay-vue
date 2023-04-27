@@ -1,9 +1,5 @@
 // @ts-ignore
-import { LoginRes, SecretLoginVM } from "../models";
-// @ts-ignore
-import { LoginVm } from "../models";
-// @ts-ignore
-import { UserAccount } from "../models";
+import { LoginRes, LoginVm, UserAccount, SecretLoginVm } from "../models";
 
 /**
  *
@@ -17,12 +13,12 @@ export declare function deleteUser(id: number, options?: {}): Promise<object>;
 /**
  *
  * @summary Login.
- * @param {LoginVm | SecretLoginVM} [loginVm]
+ * @param {LoginVm | SecretLoginVm} [loginVmSecretLoginVm]
  * @param {*} [options] Override http request option.
  * @memberof ApiSystemApiInterface
  */
 export declare function login(
-  loginVm?: LoginVm | SecretLoginVM,
+  loginVmSecretLoginVm?: LoginVm | SecretLoginVm,
   options?: {}
 ): Promise<LoginRes>;
 

@@ -1,15 +1,13 @@
 <script setup>
-import { QrStream } from "vue3-qr-reader";
-import { createPaymentWithCode } from "@/api/user/pay.js";
-import { ElMessage, ElMessageBox } from "element-plus";
-import { cancelWithCode, payWithCode } from "@/api/user/pay.d.js";
-import { has } from "@/api/tradingCode/index.d.js";
-import { defineComponent } from "vue";
+import { reactive } from "vue";
+// eslint-disable-next-line no-unused-vars
 import { QrCapture, QrStream } from "vue3-qr-reader";
-
-export default defineComponent({
-  components: { QrCapture, QrStream },
-});
+import { ElMessage } from "element-plus";
+// eslint-disable-next-line no-unused-vars
+import { createPayWithCode } from "@/api/user/pay";
+// eslint-disable-next-line no-unused-vars
+import { cancelPayCode, confirmPayCode } from "@/api/user/pay";
+import { hasTradingCode } from "@/api/tradingCode/index";
 
 const data = reactive({
   error: "",
@@ -24,7 +22,7 @@ const data = reactive({
 
 async function hasCode({ id }) {
   try {
-    await has(id);
+    await hasTradingCode(id);
     data.message += `服务器存在此二维码\n`;
     return true;
   } catch (e) {

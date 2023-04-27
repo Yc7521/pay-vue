@@ -1,9 +1,9 @@
 <script setup>
-import { useStore } from "vuex";
-import { me } from "@/api/user/info";
-import { list } from "@/api/user/pay";
 import { ref, reactive } from "vue";
+import { useStore } from "vuex";
 import { sleep } from "@/utils/time.js";
+import { me } from "@/api/user/info";
+import { listPayInfo } from "@/api/user/pay";
 
 const data = reactive({
   userInfo: {},
@@ -45,7 +45,7 @@ onMounted(async () => {
 async function load() {
   loading.value = true;
   await sleep(1000);
-  let pagePayInfo = await list(data.page, data.size);
+  let pagePayInfo = await listPayInfo(data.page, data.size);
   console.dir(pagePayInfo);
   data.payments = data.payments.concat(pagePayInfo.content);
   if (pagePayInfo.last) {

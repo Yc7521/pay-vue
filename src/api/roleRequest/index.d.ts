@@ -1,5 +1,5 @@
 // @ts-ignore
-import { PageRoleRequest, RequestReq, RoleReq, RoleRequest } from "../models";
+import { PageRoleRequest, RoleReq, RoleRequest } from "../models";
 
 /**
  *
@@ -8,7 +8,7 @@ import { PageRoleRequest, RequestReq, RoleReq, RoleRequest } from "../models";
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-export declare function apply(
+export declare function applyRoleRequest(
   roleReq?: RoleReq,
   options?: {}
 ): Promise<RoleRequest>;
@@ -20,7 +20,10 @@ export declare function apply(
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-export declare function approve(id: number, options?: {}): Promise<RoleRequest>;
+export declare function approveRoleRequest(
+  id: number,
+  options?: {}
+): Promise<RoleRequest>;
 
 /**
  *
@@ -57,7 +60,7 @@ export declare function listRoleRequest(
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-export declare function listByApplicantId(
+export declare function listRoleRequestByApplicantId(
   applicantId: number,
   page?: number,
   size?: number,
@@ -73,7 +76,7 @@ export declare function listByApplicantId(
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-export declare function listByState(
+export declare function listRoleRequestByState(
   state: string,
   page?: number,
   size?: number,
@@ -87,4 +90,7 @@ export declare function listByState(
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
-export declare function reject(id: number, options?: {}): Promise<RoleRequest>;
+export declare function rejectRoleRequest(
+  id: number,
+  options?: {}
+): Promise<RoleRequest>;

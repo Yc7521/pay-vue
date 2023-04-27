@@ -8,7 +8,7 @@ import { PageSecretKey, SecretKey, SecretReqVm } from "../models";
  * @param {*} [options] Override http request option.
  * @memberof ApiApiKeyRequestApiInterface
  */
-export declare function create(
+export declare function createApiKey(
   id: number,
   secretKey?: SecretKey,
   options?: {}
@@ -21,7 +21,7 @@ export declare function create(
  * @param {*} [options] Override http request option.
  * @memberof ApiApiKeyRequestApiInterface
  */
-export declare function createForMe(
+export declare function createApiKeyForMe(
   secretReqVm?: SecretReqVm,
   options?: {}
 ): Promise<SecretKey>;
@@ -33,7 +33,7 @@ export declare function createForMe(
  * @param {*} [options] Override http request option.
  * @memberof ApiApiKeyRequestApiInterface
  */
-export declare function deleteSecretKey(
+export declare function deleteApiKey(
   key: string,
   options?: {}
 ): Promise<object>;
@@ -42,6 +42,7 @@ export declare function deleteSecretKey(
  *
  * @summary Test for admin.
  * @param {*} [options] Override http request option.
+ * @deprecated
  * @memberof ApiApiKeyRequestApiInterface
  */
 export declare function generateSecretKeyTest(options?: {}): Promise<string>;
@@ -53,32 +54,22 @@ export declare function generateSecretKeyTest(options?: {}): Promise<string>;
  * @param {*} [options] Override http request option.
  * @memberof ApiApiKeyRequestApiInterface
  */
-export declare function getSecretKey(
+export declare function getApiKey(
   key: string,
   options?: {}
 ): Promise<SecretKey>;
 
 /**
  *
- * @summary Get a SecretKey by user id.
+ * @summary List SecretKeys by user id.
  * @param {number} id
  * @param {*} [options] Override http request option.
  * @memberof ApiApiKeyRequestApiInterface
  */
-export declare function getSecretKeyByUserId(
+export declare function getApiKeyByUserId(
   id: number,
   options?: {}
 ): Promise<Array<SecretKey>>;
-
-/**
- *
- * @summary Get a SecretKey by user id.
- * @param {*} [options] Override http request option.
- * @memberof ApiApiKeyRequestApiInterface
- */
-export declare function getSecretKeyForMe(options?: {}): Promise<
-  Array<SecretKey>
->;
 
 /**
  *
@@ -88,8 +79,18 @@ export declare function getSecretKeyForMe(options?: {}): Promise<
  * @param {*} [options] Override http request option.
  * @memberof ApiApiKeyRequestApiInterface
  */
-export declare function listSecretKey(
+export declare function listApiKey(
   page?: number,
   size?: number,
   options?: {}
 ): Promise<PageSecretKey>;
+
+/**
+ *
+ * @summary List SecretKeys for current user.
+ * @param {*} [options] Override http request option.
+ * @memberof ApiApiKeyRequestApiInterface
+ */
+export declare function listApiKeyForMe(options?: {}): Promise<
+  Array<SecretKey>
+>;

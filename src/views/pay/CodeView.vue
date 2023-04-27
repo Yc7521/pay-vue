@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from "vue";
 import vueQr from "vue-qr/src/packages/vue-qr.vue";
 import { genPaymentCode, genReceiptCode } from "@/api/user/info";
 

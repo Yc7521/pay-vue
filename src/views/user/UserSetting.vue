@@ -1,8 +1,8 @@
 <script setup>
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { changePassword, me } from "@/api/user/info";
-import { updateNickname } from "@/api/user/info";
+import { changeNickname } from "@/api/user/info";
 
 const fullScreenDialog = true;
 const router = useRouter();
@@ -53,7 +53,7 @@ async function saveNickname() {
     nickname.msg = "nickname can not be empty";
     return;
   }
-  let u = await updateNickname(nickname.data.nickname);
+  let u = await changeNickname(nickname.data.nickname);
   if (u) {
     store.commit("user/setUser", u);
   }
