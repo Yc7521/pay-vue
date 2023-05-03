@@ -1,7 +1,20 @@
 <script setup>
 import { useRouter } from "vue-router";
+import { me } from "@/api/user/info";
 
 const router = useRouter();
+
+onMounted(async () => {
+  let user = await me();
+  if (!user || !user.id) {
+    await router.replace({
+      name: "login",
+      params: {
+        redirect: router.currentRoute.value.fullPath,
+      },
+    });
+  }
+});
 
 function go(name) {
   router.push({ name });
