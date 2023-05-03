@@ -29,7 +29,7 @@ async function doRegister() {
     msg.color = "#6cf";
     msg.text = "Register Success";
     setTimeout(async () => {
-      await router.push({
+      router.push({
         name: "login",
       });
     }, 3000);
@@ -43,7 +43,7 @@ async function doRegister() {
 }
 
 async function doLogin() {
-  await router.push({
+  router.push({
     name: "login",
   });
 }

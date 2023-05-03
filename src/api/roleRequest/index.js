@@ -85,6 +85,23 @@ export function listRoleRequest(page = null, size = null, options = {}) {
 
 /**
  *
+ * @summary List My RoleRequest.
+ * @param {*} [options] Override http request option.
+ */
+export function listMyRoleRequest(options = {}) {
+  const path = `/api/request/role/me`;
+  const params = {};
+
+  return request({
+    url: path,
+    method: "GET",
+    params,
+    ...options,
+  });
+}
+
+/**
+ *
  * @summary List RoleRequest by applicantId.
  * @param {number} applicantId
  * @param {number} [page]
@@ -149,14 +166,17 @@ export function listRoleRequestByState(
  *
  * @summary Reject a RoleRequest by id.
  * @param {number} id
+ * @param force
  * @param {*} [options] Override http request option.
  */
-export function rejectRoleRequest(id, options = {}) {
+export function rejectRoleRequest(id, force = false, options = {}) {
   const path = `/api/request/role/{id}/reject`.replace(
     `{${"id"}}`,
     encodeURIComponent(String(id))
   );
-  const params = {};
+  const params = {
+    force,
+  };
 
   return request({
     url: path,

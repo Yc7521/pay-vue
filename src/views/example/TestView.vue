@@ -6,6 +6,7 @@ import { getTradingCode } from "@/api/tradingCode/index";
 import { genReceiptCode, me } from "@/api/user/info";
 import { login } from "@/api/system/login";
 
+// TODO: split this structure, add colorDark, colorLight
 const data = reactive({
   show: false,
   code: {

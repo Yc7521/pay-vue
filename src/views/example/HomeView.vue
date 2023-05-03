@@ -1,17 +1,22 @@
 <script setup>
-import HelloWorld from "../../components/HelloWorld.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function go(name) {
+  router.push({ name });
+}
 </script>
 
 <template>
-  <div class="flex justify-center space-x-10">
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="@/assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <el-row class="mt-3">
+    <el-col :span="12">
+      <el-button size="large" type="primary" @click="go('scan-code')">扫一扫</el-button>
+    </el-col>
+    <el-col :span="12">
+      <el-button size="large" type="primary" @click="go('show-code')">收付款</el-button>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>

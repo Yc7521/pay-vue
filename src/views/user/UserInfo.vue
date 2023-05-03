@@ -20,7 +20,7 @@ onMounted(async () => {
       store.commit("user/setUser", res);
       data.userInfo = res;
     } else {
-      await router.push({
+      router.push({
         name: "login",
       });
     }
@@ -30,7 +30,7 @@ onMounted(async () => {
 async function doLogout() {
   store.commit("user/setUser", {});
   removeToken();
-  await router.push({
+  router.push({
     name: "login",
   });
 }

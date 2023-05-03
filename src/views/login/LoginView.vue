@@ -26,13 +26,19 @@ async function doLogin() {
   setToken(res.idToken);
   let info = await me();
   store.commit("user/setUser", info);
-  await router.push({
-    name: "user",
-  });
+  if (router.params && router.params.redirect) {
+    router.push({
+      path: router.params.redirect,
+    });
+  } else {
+    router.push({
+      name: "user",
+    });
+  }
 }
 
 async function doRegister() {
-  await router.push({
+  router.push({
     name: "register",
   });
 }

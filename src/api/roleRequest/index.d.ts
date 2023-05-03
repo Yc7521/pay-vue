@@ -53,6 +53,13 @@ export declare function listRoleRequest(
 
 /**
  *
+ * @summary List My RoleRequest.
+ * @param {*} [options] Override http request option.
+ */
+export declare function listMyRoleRequest(options?: {}): Promise<RoleRequest[]>;
+
+/**
+ *
  * @summary List RoleRequest by applicantId.
  * @param {number} applicantId
  * @param {number} [page]
@@ -87,10 +94,12 @@ export declare function listRoleRequestByState(
  *
  * @summary Reject a RoleRequest by id.
  * @param {number} id
+ * @param force
  * @param {*} [options] Override http request option.
  * @memberof ApiRoleRequestApiInterface
  */
 export declare function rejectRoleRequest(
   id: number,
+  force: boolean,
   options?: {}
 ): Promise<RoleRequest>;

@@ -11,6 +11,7 @@
     "lint": "eslint src/**/*.{js,vue}"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
     "@vueuse/components": "^9.13.0",
     "@vueuse/core": "^9.13.0",
     "axios": "^1.2.2",

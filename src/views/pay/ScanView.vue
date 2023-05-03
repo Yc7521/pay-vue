@@ -2,6 +2,7 @@
 import { reactive } from "vue";
 import { QrStream, QrCapture } from "vue3-qr-reader";
 import { ElMessage, ElMessageBox } from "element-plus";
+import { Back } from "@element-plus/icons-vue";
 import {
   cancelPayCode,
   createPayWithCode,
@@ -10,10 +11,12 @@ import {
 import { hasTradingCode } from "@/api/tradingCode/index";
 // import { changePassword } from "@/api/user/info.js";
 
+const router = useRouter();
+
 const data = reactive({
   error: "",
   result: {},
-  stream: false,
+  stream: true,
   torch: false,
   camera: "rear",
   capture: false,
@@ -41,7 +44,7 @@ function onError(e) {
     data.error = `错误: 相机错误(${error.name})!`;
   }
   setTimeout(() => {
-    data.stream = false;
+    // data.stream = false;
   }, 1000);
 }
 
@@ -85,9 +88,15 @@ watch(
                 `向${payment.receivingUser.nickname}付款${payment.money}元`,
                 "确认付款",
                 {
+                  customStyle: {
+                    width: "80%",
+                  },
                   confirmButtonText: "确定",
                   cancelButtonText: "取消",
                   type: "warning",
+                  showClose: false,
+                  closeOnClickModal: false,
+                  closeOnPressEscape: false,
                 }
               );
               console.log("res", res);
@@ -154,7 +163,7 @@ const switchCamera = () => {
 const stroke = ["red", "green", "blue"];
 // eslint-disable-next-line no-unused-vars
 const paintBoundingBox = (detectedCodes, ctx) => {
-  const strokeStyle = stroke[parseInt(Math.random() * 3)];
+  const strokeStyle = stroke[Math.floor(Math.random() * 3)];
   for (const detectedCode of detectedCodes) {
     const {
       boundingBox: { x, y, width, height },
@@ -167,114 +176,96 @@ const paintBoundingBox = (detectedCodes, ctx) => {
 </script>
 
 <template>
-  <h3>Scan Code</h3>
-  <div class="reader">
-    <button class="sweep" @click="data.stream = true">扫一扫</button>
-
-    <button class="sweep">
-      <qr-capture :capture="data.capture" @decode="onDecode"></qr-capture>
-      从相册选择
-    </button>
+  <!--  <h3>Scan Code</h3>-->
+  <div class="fixed inset-0 z-2000">
+    <div class="absolute inset-0 bg-[var(--color-surface)]"></div>
 
     <qr-stream
-      class="stream"
+      class="absolute inset-0"
       v-if="data.stream"
       :torch="data.torch"
       :camera="data.camera"
       @decode="onDecode"
-    >
-      <div style="color: red" class="frame"></div>
-      <p v-show="data.error">{{ data.error }}</p>
-      <button @click="data.torch = !data.torch">
-        {{ data.torch ? "关闭闪光灯" : "开启闪光灯" }}
-      </button>
-      <button @click="switchCamera">
-        {{ "rear" === data.camera ? "前置摄像头" : "后置摄像头" }}
-      </button>
-      <button @click="data.stream = !data.stream">退出</button>
-    </qr-stream>
+    />
 
-    <textarea
-      class="result"
-      v-model="data.message"
-      placeholder="信息"
-    ></textarea>
+    <!-- bg-[rgba(0,0,0,0.5)] -->
+    <div class="absolute inset-4">
+      <el-row align="middle" class="h-[40px] text-left mt-3">
+        <el-button class="!outline-none" text circle @click="router.back()">
+          <el-icon>
+            <Back />
+          </el-icon>
+        </el-button>
+        Scan
+      </el-row>
+      <el-row
+        class="text-[var(--color-error)] mt-3"
+        justify="center"
+        v-show="data.error"
+      >
+        {{ data.error }}
+      </el-row>
+      <el-row class="mt-3" justify="center">
+        <el-space direction="horizontal">
+          <el-button @click="data.torch = !data.torch" class="opacity-75">
+            {{ data.torch ? "关闭闪光灯" : "开启闪光灯" }}
+          </el-button>
+          <el-button @click="switchCamera()" class="opacity-75">
+            {{ "rear" === data.camera ? "前置摄像头" : "后置摄像头" }}
+          </el-button>
+        </el-space>
+      </el-row>
+      <div
+        class="absolute h-[200px] w-[200px] inset-4 m-auto border-2 border-dashed border-red-600 border-opacity-40 752106133"
+      ></div>
+      <button class="select-image text-[18px]">
+        <qr-capture :capture="data.capture" @decode="onDecode"></qr-capture>
+        从相册选择
+      </button>
+    </div>
+
+    <!-- <textarea-->
+    <!--   class="result"-->
+    <!--   v-model="data.message"-->
+    <!--   placeholder="信息"-->
+    <!-- ></textarea>-->
   </div>
 </template>
 
 <style lang="less" scoped>
-.reader {
-  font-size: 16px;
+.select-image {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  margin: 20px;
+  padding: 12px;
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-variant);
+  border: 1px solid var(--color-outline-variant);
+  overflow: hidden;
+  cursor: pointer;
 
-  .sweep {
-    position: relative;
-    margin: 20px;
-    padding: 12px;
-    width: 300px;
-    font-size: 18px;
-    color: white;
-    background: #42b983;
-    border: 1px solid #42b983;
-    overflow: hidden;
-    cursor: pointer;
-
-    input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-      opacity: 0;
-    }
-  }
-
-  .stream {
-    position: fixed !important;
+  input {
+    position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-
-    p {
-      color: red;
-      text-align: center;
-    }
-
-    button {
-      margin: 20px auto;
-      border: 1px solid gray;
-      background: rgba(255, 255, 255, 0.5);
-    }
-  }
-
-  .result {
-    box-sizing: border-box;
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    min-height: 180px;
-    font-size: 22px;
-    border-radius: 6px;
-    border: 1px solid gray;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
   }
 }
 
-.frame {
-  border-style: solid;
-  border-width: 2px;
-  border-color: red;
-  height: 200px;
-  width: 200px;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-  margin: auto;
-}
+// .result {
+//   box-sizing: border-box;
+//   display: block;
+//   margin: 10px auto;
+//   padding: 10px;
+//   width: 80%;
+//   min-height: 180px;
+//   font-size: 22px;
+//   border-radius: 6px;
+//   border: 1px solid gray;
+// }
 </style>

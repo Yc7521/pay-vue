@@ -3,12 +3,16 @@ import { reactive } from "vue";
 import { useStore } from "vuex";
 import { ElMessageBox } from "element-plus";
 import { createApiKeyForMe, listApiKeyForMe } from "@/api/system/apikey";
+import { useClipboard } from "@vueuse/core";
 
 const name = "ApiKey";
 const fullScreenDialog = true;
 
 const router = useRouter();
 const store = useStore();
+const { copy, copied } = useClipboard({
+  legacy: true,
+});
 
 const data = reactive({
   userId: 0,
@@ -40,10 +44,13 @@ function toDateStr(date) {
 
 async function apply() {
   if (data.keys.length > 2) {
-    await ElMessageBox.alert({
-      title: "Warning",
-      message: "You can only have 3 keys at most",
-      type: "warning",
+    await ElMessageBox.alert("You can only have 3 keys at most", "Warning", {
+      customStyle: {
+        width: "80%",
+      },
+      showClose: false,
+      closeOnClickModal: false,
+      closeOnPressEscape: false,
     });
     return;
   }
@@ -63,12 +70,6 @@ function showKey(key) {
 function showDate(time) {
   return new Date(time).toLocaleDateString();
 }
-
-function copyKey(key) {
-  // eslint-disable-next-line no-undef
-  // copy(key);
-  key;
-}
 </script>
 
 <template>
@@ -79,9 +80,17 @@ function copyKey(key) {
   <el-row justify="center"> Key List:</el-row>
   <el-space direction="vertical">
     <el-row :key="key.key" v-for="key in data.keys" class="items-baseline">
-      <el-button @click="copyKey(key.key)" text
-        >{{ showKey(key.key) }}
-      </el-button>
+      <el-tooltip
+        :disabled="!copied"
+        effect="dark"
+        content="Copied!"
+        placement="top"
+      >
+        <el-button @click="copy(key.key)" text
+          >{{ showKey(key.key) }}
+        </el-button>
+      </el-tooltip>
+
       <span>expire at: {{ showDate(key.expired) }}</span>
     </el-row>
   </el-space>

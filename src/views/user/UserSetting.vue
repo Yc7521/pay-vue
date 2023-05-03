@@ -1,8 +1,8 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useStore } from "vuex";
-import { changePassword, me } from "@/api/user/info";
-import { changeNickname } from "@/api/user/info";
+import { changeNickname, changePassword, me } from "@/api/user/info";
+import { applyRoleRequest, listMyRoleRequest } from "@/api/roleRequest/index";
 
 const fullScreenDialog = true;
 const router = useRouter();
@@ -24,6 +24,16 @@ const password = reactive({
     newPassword2: "",
   },
 });
+const role = reactive({
+  show: false,
+  msg: null,
+  data: {
+    name: "",
+    idCard: "",
+    remarks: "",
+  },
+  old: [],
+});
 const userType = ref("");
 
 onMounted(async () => {
@@ -34,13 +44,14 @@ onMounted(async () => {
       store.commit("user/setUser", res);
       user = res;
     } else {
-      await router.push({
+      router.push({
         name: "login",
       });
     }
   }
   nickname.data.nickname = user.nickname;
   userType.value = user.userType;
+  role.old = await listMyRoleRequest();
 });
 
 function showNickname() {
@@ -84,13 +95,39 @@ function savePassword() {
   console.log("save password");
 }
 
-function toBusiness() {
-  // TODO:
+function showBusiness() {
+  role.show = true;
+  role.msg = null;
+}
+
+function showDate(time) {
+  return new Date(time).toLocaleDateString();
+}
+
+async function applyBusiness() {
+  try {
+    let res = await applyRoleRequest({
+      name: role.data.name,
+      idCard: role.data.idCard,
+      remarks: role.data.remarks,
+    });
+    role.msg = res.applicant.nickname + " apply for business account";
+    role.show = false;
+  } catch (e) {
+    role.msg = e.response.data.message;
+  }
+  role.old = await listMyRoleRequest();
 }
 
 function keyManagement() {
   router.push({
     name: "api-key",
+  });
+}
+
+function admin() {
+  router.push({
+    name: "admin-role",
   });
 }
 </script>
@@ -102,8 +139,15 @@ function keyManagement() {
         nickname: {{ nickname.data.nickname }}
       </div>
       <div @click="showPassword()" class="box">change password</div>
-      <div @click="toBusiness()" class="box" v-if="userType === 'Personal'">
-        apply for the Business role
+      <div class="box" v-if="userType === 'Personal'">
+        <el-row @click="showBusiness()" class="my-1">
+          apply for Business account
+        </el-row>
+        <el-row class="my-1">History:</el-row>
+        <el-row class="my-1 ml-2" v-for="i in role.old" :key="i.id">
+          Apply at {{ showDate(i.create) }}
+          <el-tag class="ml-2">{{ i.state }}</el-tag>
+        </el-row>
       </div>
       <div
         @click="keyManagement()"
@@ -112,7 +156,9 @@ function keyManagement() {
       >
         api key management
       </div>
-      <div class="box" v-else-if="userType === 'Admin'">Admin</div>
+      <div @click="admin()" class="box" v-else-if="userType === 'Admin'">
+        Admin View
+      </div>
     </el-space>
 
     <el-dialog v-model="nickname.show" :fullscreen="fullScreenDialog">
@@ -155,6 +201,33 @@ function keyManagement() {
           </el-form>
         </el-col>
       </el-row>
+    </el-dialog>
+    <el-dialog
+      v-model="role.show"
+      :fullscreen="fullScreenDialog"
+      v-if="userType === 'Personal'"
+    >
+      <h2>Apply for Business account</h2>
+      <el-form :model="role.data" label-width="80px">
+        <el-form-item label="message" v-if="role.msg">
+          <el-row>{{ role.msg }}</el-row>
+        </el-form-item>
+        <el-form-item label="name">
+          <el-input v-model="role.data.name" />
+        </el-form-item>
+        <el-form-item label="id card">
+          <el-input v-model="role.data.idCard" />
+        </el-form-item>
+        <el-form-item label="remark">
+          <el-input
+            v-model="role.data.remarks"
+            :autosize="{ minRows: 2, maxRows: 5 }"
+            type="textarea"
+          />
+        </el-form-item>
+        <el-button @click="role.show = false">Cancel</el-button>
+        <el-button type="primary" @click="applyBusiness()">OK</el-button>
+      </el-form>
     </el-dialog>
   </div>
 </template>
