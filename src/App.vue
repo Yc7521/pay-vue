@@ -55,10 +55,10 @@ function nav_class(path) {
     // "text-white": router.currentRoute.value.path === path,
     // "text-blue-500": router.currentRoute.value.path !== path,
 
-    "!bg-[var(--color-surface-variant)]": match,
-    "!text-[var(--color-on-surface-variant)]": match,
-    "!bg-[var(--color-surface)]": !match,
-    "!text-[var(--color-on-surface)]": !match,
+    "!bg-[var(--el-bg-color-variant)]": match,
+    "!text-[var(--el-color-variant)]": match,
+    "!bg-[var(--el-bg-color-surface)]": !match,
+    "!text-[var(--el-color-black)]": !match,
   };
 }
 

@@ -23,10 +23,10 @@ const disabled = computed(() => loading.value || noMore.value);
 const router = useRouter();
 const store = useStore();
 const stateTagStyle = {
-  Unpaid: "var(--color-secondary-container)",
-  Paid: "var(--color-primary-container)",
-  Canceled: "var(--color-tertiary-container)",
-  Refunded: "var(--color-tertiary-container)",
+  Unpaid: "var(--el-color-success-light-3)",
+  Paid: "var(--el-color-primary-light-3)",
+  Canceled: "var(--el-color-warning-light-3)",
+  Refunded: "var(--el-color-warning-light-3)",
 };
 
 onMounted(async () => {

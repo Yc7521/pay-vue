@@ -27,10 +27,10 @@ function nav_class(path) {
     match = curr.startsWith(path);
   }
   return {
-    "!bg-[var(--color-surface-variant)]": match,
-    "!text-[var(--color-on-surface-variant)]": match,
-    "!bg-[var(--color-surface)]": !match,
-    "!text-[var(--color-on-surface)]": !match,
+    "!bg-[var(--el-bg-color-variant)]": match,
+    "!text-[var(--el-color-variant)]": match,
+    "!bg-[var(--el-bg-color-surface)]": !match,
+    "!text-[var(--el-color-black)]": !match,
   };
 }
 

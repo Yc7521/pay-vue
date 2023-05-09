@@ -177,11 +177,14 @@ const paintBoundingBox = (detectedCodes, ctx) => {
 
 <template>
   <!--  <h3>Scan Code</h3>-->
-  <div class="fixed inset-0 z-2000">
-    <div class="absolute inset-0 bg-[var(--color-surface)]"></div>
+  <div
+    style="z-index: 1000; background-color: var(--el-bg-color-surface)"
+    class="fixed inset-0 bg-[var(--el-bg-color-surface)] z-1000"
+  >
+    <div class="absolute inset-0 bg-[var(--el-bg-color-surface)] z-1001"></div>
 
     <qr-stream
-      class="absolute inset-0"
+      class="absolute inset-0 z-1002"
       v-if="data.stream"
       :torch="data.torch"
       :camera="data.camera"
@@ -189,7 +192,7 @@ const paintBoundingBox = (detectedCodes, ctx) => {
     />
 
     <!-- bg-[rgba(0,0,0,0.5)] -->
-    <div class="absolute inset-4">
+    <div class="absolute inset-4 z-1010">
       <el-row align="middle" class="h-[40px] text-left mt-3">
         <el-button class="!outline-none" text circle @click="router.back()">
           <el-icon>
@@ -199,7 +202,7 @@ const paintBoundingBox = (detectedCodes, ctx) => {
         Scan
       </el-row>
       <el-row
-        class="text-[var(--color-error)] mt-3"
+        class="text-[var(--el-color-danger)] mt-3"
         justify="center"
         v-show="data.error"
       >
@@ -240,9 +243,9 @@ const paintBoundingBox = (detectedCodes, ctx) => {
   right: 2rem;
   margin: 20px;
   padding: 12px;
-  color: var(--color-on-surface-variant);
-  background: var(--color-surface-variant);
-  border: 1px solid var(--color-outline-variant);
+  color: var(--el-color-black);
+  background: var(--el-bg-color-surface);
+  border: 1px solid var(--el-color-outline);
   overflow: hidden;
   cursor: pointer;
 

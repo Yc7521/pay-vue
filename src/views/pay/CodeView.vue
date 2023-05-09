@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 import vueQr from "vue-qr/src/packages/vue-qr.vue";
 import { genPaymentCode, genReceiptCode } from "@/api/user/info";
 
@@ -12,6 +12,17 @@ const data = reactive({
     money: 0,
   },
 });
+const type = ref("Payment");
+
+watch(type, async () => {
+  await genCode(type.value);
+});
+watch(
+  () => data.money,
+  async () => {
+    await genCode(type.value);
+  }
+);
 
 /**
  * @param type {"Payment"|"Receipt"}
@@ -33,23 +44,39 @@ function qr() {
 </script>
 
 <template>
-  <h3>Show Code</h3>
-  <el-input-number v-model="data.money" :step="10" />
+  <!-- <h3>Show Code</h3> -->
+
   <el-row justify="space-evenly">
-    <el-col :xs="10" :span="6">
-      <el-button type="primary" @click="genCode('Payment')">
-        Payment
-      </el-button>
+    <el-col :xs="24" :span="6" class="m-2">
+      <!-- <el-select v-model="type">
+        <el-option
+          v-for="item in ['Payment', 'Receipt']"
+          :key="item"
+          :label="item"
+          :value="item"
+        />
+      </el-select> -->
+      <el-switch
+        class="switch"
+        v-model="type"
+        active-text="Payment"
+        inactive-text="Receipt"
+        active-value="Payment"
+        inactive-value="Receipt"
+      />
     </el-col>
-    <el-col :xs="10" :span="6">
-      <el-button type="primary" @click="genCode('Receipt')">
-        Receipt
-      </el-button>
+    <el-col :xs="24" :span="6" class="m-2">
+      <el-input-number v-model="data.money" :step="10" />
     </el-col>
   </el-row>
-  <div>
+  <div v-if="data.code.id !== 0">
     <vue-qr :text="qr()" :size="200"></vue-qr>
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.switch {
+  --el-switch-on-color: var(--el-bg-color-variant);
+  --el-switch-off-color: var(--el-bg-color-variant);
+}
+</style>
