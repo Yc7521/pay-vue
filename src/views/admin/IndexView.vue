@@ -46,7 +46,7 @@ function replace(path) {
 
 <template>
   <el-container class="h-[100%]">
-    <el-header height="40px" class="text-left mt-3">
+    <el-header height="40px" class="text-left">
       <el-row class="h-[100%]" align="middle">
         <el-col
           class="h-[100%]"

@@ -62,9 +62,4 @@ async function doLogout() {
   </el-space>
 </template>
 
-<style scoped>
-.box {
-  border-radius: var(--el-border-radius-base);
-  /*box-shadow: var(--el-box-shadow-light);*/
-}
-</style>
+<style scoped></style>

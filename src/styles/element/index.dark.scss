@@ -1,0 +1,75 @@
+// styles/element/index.scss
+/* 只需要重写你需要的即可 */
+@use "sass:map";
+
+// CSS3 var
+@use "element-plus/theme-chalk/src/dark/var.scss" as * with (
+  $colors: (
+    "white": #001f2a,
+    "black": #bfe9ff,
+    "primary": (
+      "base": #79d1ff,
+    ),
+    "success": (
+      "base": #59d5f8,
+    ),
+    "warning": (
+      "base": #d2bcff,
+    ),
+    "danger": (
+      "base": #ffb4ab,
+    ),
+    "error": (
+      "base": #ffb4ab,
+    ),
+    "info": (
+      "base": #41484d,
+    ),
+  ),
+  $bg-color: (
+    "page": #001f2a,
+    "": #001f2a,
+    "overlay": #001f2a,
+  )
+);
+@use "element-plus/theme-chalk/src/mixins/_var.scss" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins.scss" as *;
+
+html.dark {
+  color-scheme: dark;
+
+  // hex colors
+  @each $type in (primary, success, warning, danger, error, info) {
+    @include set-css-color-type($colors, $type);
+  }
+
+  // --el-box-shadow-#{$type}
+  @include set-component-css-var("box-shadow", $box-shadow);
+
+  // color-scheme
+  // Background --el-bg-color-#{$type}
+  @include set-component-css-var("bg-color", $bg-color);
+  // --el-text-color-#{$type}
+  @include set-component-css-var("text-color", $text-color);
+  // --el-border-color-#{$type}
+  @include set-component-css-var("border-color", $border-color);
+  // Fill --el-fill-color-#{$type}
+  @include set-component-css-var("fill-color", $fill-color);
+  @include set-component-css-var("mask-color", $mask-color);
+}
+
+@include dark(button) {
+  @include set-component-css-var("button", $button);
+}
+
+@include dark(card) {
+  @include set-component-css-var("card", $card);
+}
+
+@include dark(empty) {
+  @include set-component-css-var("empty", $empty);
+}
+
+// 如果只是按需导入，则可以忽略以下内容。
+// 如果你想导入所有样式:
+// @use "element-plus/theme-chalk/src/dark/index.scss" as *;

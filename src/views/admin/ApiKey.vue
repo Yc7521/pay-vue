@@ -78,17 +78,18 @@ async function handleDelete(key) {
     @row-dblclick="row_click"
   >
     <el-table-column prop="userInfo.nickname" label="Nickname" sortable />
-    <el-table-column label="Key" sortable width="80">
-      <template #default="scope">
-        <span>{{ showKey(scope.row.key) }}</span>
-      </template>
-    </el-table-column>
+    <el-table-column
+      label="Key"
+      sortable
+      width="80"
+      :formatter="(row, col) => showKey(row.key)"
+    />
     <!--      <el-table-column prop="username" label="Login Name" width="180" />-->
-    <el-table-column label="Expired" sortable>
-      <template #default="scope">
-        <span>{{ showDate(scope.row.expired) }}</span>
-      </template>
-    </el-table-column>
+    <el-table-column
+      label="Expired"
+      sortable
+      :formatter="(row, col) => showDate(row.expired)"
+    />
     <el-table-column label="Operations">
       <template #default="scope">
         <el-button

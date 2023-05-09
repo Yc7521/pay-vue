@@ -24,10 +24,14 @@ function go(name) {
 <template>
   <el-row class="mt-3">
     <el-col :span="12">
-      <el-button size="large" type="primary" @click="go('scan-code')">扫一扫</el-button>
+      <el-button size="large" type="primary" @click="go('scan-code')">
+        扫一扫
+      </el-button>
     </el-col>
     <el-col :span="12">
-      <el-button size="large" type="primary" @click="go('show-code')">收付款</el-button>
+      <el-button size="large" type="primary" @click="go('show-code')">
+        收付款
+      </el-button>
     </el-col>
   </el-row>
 </template>

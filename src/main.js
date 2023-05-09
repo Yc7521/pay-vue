@@ -6,9 +6,10 @@ import store from "./store";
 
 import "virtual:windi.css";
 // import "element-plus/dist/index.css";
-import "./styles/theme.css";
+// import "./styles/theme.css";
+// import "element-plus/theme-chalk/dark/css-vars.css";
 import "./styles/element/index.scss";
-import "element-plus/theme-chalk/dark/css-vars.css";
+import "./styles/element/index.dark.scss";
 
 // if you're using CDN, please remove this line.
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'

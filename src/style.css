@@ -5,8 +5,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: var(--color-on-background);
-  background-color: var(--color-background);
+  /* color: var(--color-on-background);
+  background-color: var(--color-background); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,11 +17,11 @@
 
 a {
   font-weight: 500;
-  color: var(--color-tertiary);
+  /* color: var(--color-tertiary); */
   text-decoration: inherit;
 }
 a:hover {
-  color: var(--color-surface-tint);
+  /* color: var(--color-surface-tint); */
 }
 
 h1 {
@@ -36,13 +36,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--color-primary-container);
-  color: var(--color-on-primary-container);
+  /* background-color: var(--color-primary-container); */
+  /* color: var(--color-on-primary-container); */
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: var(--color-outline);
+  /* border-color: var(--color-outline); */
 }
 button:focus,
 button:focus-visible {
@@ -55,4 +55,16 @@ button:focus-visible {
   margin: 0 auto;
   padding: 0 /*1rem*/;
   text-align: start;
+}
+
+.box {
+  border-radius: var(--el-border-radius-base);
+  box-shadow: var(--el-box-shadow-light);
+  padding: 0 0.75rem;
+}
+.box:focus,
+.box:hover {
+  outline: none;
+  /* blur(2px) */
+  filter: drop-shadow(3px 2px 2px rgba(0, 0, 0, 0.2));
 }

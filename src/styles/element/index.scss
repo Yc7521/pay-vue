@@ -2,31 +2,31 @@
 /* 只需要重写你需要的即可 */
 @use "element-plus/theme-chalk/src/common/var.scss" with (
   $colors: (
-    "white": #fafcffff,
-    "black": #001f2aff,
+    "white": #fafcffff /* #fafcff */,
+    "black": #001f2aff /* #001f2a */,
     "primary": (
-      "base": #006689ff,
+      "base": #006689ff /* #c3e8ff */,
     ),
     "success": (
-      "base": #00677dff,
+      "base": #00677dff /* #b2ebff */,
     ),
     "warning": (
-      "base": #6b4cacff,
+      "base": #6b4cacff /* #6b4cac */,
     ),
     "danger": (
-      "base": #ba1a1aff,
+      "base": #ba1a1aff /* #ba1a1a */,
     ),
     "error": (
-      "base": #ba1a1aff,
+      "base": #ba1a1aff /* #ba1a1a */,
     ),
     "info": (
-      "base": #71787dff,
+      "base": #71787dff /* #dce3e9 */,
     ),
   ),
   $bg-color: (
-    "page": #fafcffff,
-    "": #fafcffff,
-    "overlay": #fafcffff,
+    "page": #fafcffff /* #fafcff */,
+    "": #fafcffff /* #001f2a */,
+    "overlay": #fafcffff /* #fafcff */,
   )
 );
 

@@ -17,6 +17,8 @@ const data = reactive({
     { name: "Show", path: "/pay/show" },
     { name: "Scan", path: "/pay/scan" },
     { name: "User", path: "/user" },
+    { name: "Admin(key)", path: "/admin/key" },
+    { name: "Admin(role)", path: "/admin/role" },
     { name: "Cookie Shop", path: "/test" },
   ],
 });
@@ -33,7 +35,7 @@ const nav_list = [
   },
 ];
 
-const show_nav = ref(true);
+const show_nav = ref(false);
 // if mobile, show nav
 if (window.innerWidth < 768) {
   show_nav.value = false;
@@ -153,14 +155,12 @@ function replace(path) {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #abb2bf;
+  background-color: var(--el-bg-color);
 }
 
-@media (prefers-color-scheme: light) {
-  #app {
-    color: #2c3e50;
-  }
-}
+// .dark #app {
+//   background-color: var(--el-bg-color);
+// }
 
 nav {
   padding: 0 30px 30px 30px;

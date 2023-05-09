@@ -1,6 +1,8 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useStore } from "vuex";
+import { UseDark } from "@vueuse/components";
+import { Sunny, Moon } from "@element-plus/icons-vue";
 import { changeNickname, changePassword, me } from "@/api/user/info";
 import { applyRoleRequest, listMyRoleRequest } from "@/api/roleRequest/index";
 
@@ -139,16 +141,18 @@ function admin() {
         nickname: {{ nickname.data.nickname }}
       </div>
       <div @click="showPassword()" class="box">change password</div>
-      <div class="box" v-if="userType === 'Personal'">
-        <el-row @click="showBusiness()" class="my-1">
+      <template v-if="userType === 'Personal'">
+        <el-row @click="showBusiness()" class="box my-1">
           apply for Business account
         </el-row>
-        <el-row class="my-1">History:</el-row>
-        <el-row class="my-1 ml-2" v-for="i in role.old" :key="i.id">
-          Apply at {{ showDate(i.create) }}
-          <el-tag class="ml-2">{{ i.state }}</el-tag>
-        </el-row>
-      </div>
+        <div class="box">
+          <el-row class="my-1">History:</el-row>
+          <el-row class="my-1 ml-2" v-for="i in role.old" :key="i.id">
+            Apply at {{ showDate(i.create) }}
+            <el-tag class="ml-2">{{ i.state }}</el-tag>
+          </el-row>
+        </div>
+      </template>
       <div
         @click="keyManagement()"
         class="box"
@@ -159,6 +163,19 @@ function admin() {
       <div @click="admin()" class="box" v-else-if="userType === 'Admin'">
         Admin View
       </div>
+      <el-row class="box" align="middle" justify="center">
+        Dark:
+        <UseDark v-slot="{ isDark, toggleDark }">
+          <el-switch
+            class="ml-3"
+            inline-prompt
+            :model-value="isDark"
+            :active-icon="Moon"
+            :inactive-icon="Sunny"
+            @change="toggleDark"
+          />
+        </UseDark>
+      </el-row>
     </el-space>
 
     <el-dialog v-model="nickname.show" :fullscreen="fullScreenDialog">
@@ -232,10 +249,4 @@ function admin() {
   </div>
 </template>
 
-<style scoped>
-.box {
-  text-align: start;
-  border-radius: var(--el-border-radius-base);
-  /*box-shadow: var(--el-box-shadow-light);*/
-}
-</style>
+<style scoped></style>

@@ -57,6 +57,7 @@ onMounted(async () => {
 watch(
   () => reqs.state,
   async () => {
+    reqs.page = 1;
     await load();
   }
 );
@@ -150,17 +151,19 @@ async function handleReject(id, force = false) {
   >
     <el-table-column prop="applicant.nickname" label="Applicant" sortable />
     <el-table-column prop="name" label="Name" sortable />
-    <el-table-column label="id card" sortable width="80">
-      <template #default="scope">
-        <span>{{ showKey(scope.row.idCard) }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column label="Create" sortable>
-      <template #default="scope">
-        <span>{{ showDate(scope.row.create) }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column prop="state" label="statS" sortable />
+    <el-table-column
+      label="id card"
+      sortable
+      width="80"
+      :formatter="(row, col) => showKey(row.idCard)"
+    />
+    <el-table-column
+      prop="create"
+      label="Create"
+      sortable
+      :formatter="(row, col) => showDate(row.create)"
+    />
+    <el-table-column prop="state" label="State" sortable />
     <el-table-column label="Operations">
       <template #default="scope">
         <template v-if="scope.row.state === 'Unprocessed'">
