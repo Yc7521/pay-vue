@@ -13,12 +13,12 @@ export declare function deleteUser(id: number, options?: {}): Promise<object>;
 /**
  *
  * @summary Login.
- * @param {LoginVm | SecretLoginVm} [loginVmSecretLoginVm]
+ * @param {LoginVm | SecretLoginVm} [loginVm]
  * @param {*} [options] Override http request option.
  * @memberof ApiSystemApiInterface
  */
 export declare function login(
-  loginVmSecretLoginVm?: LoginVm | SecretLoginVm,
+  loginVm?: LoginVm | SecretLoginVm,
   options?: {}
 ): Promise<LoginRes>;
 

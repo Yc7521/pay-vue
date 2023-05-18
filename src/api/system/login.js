@@ -24,10 +24,10 @@ export function deleteUser(id, options = {}) {
 /**
  *
  * @summary Login.
- * @param {LoginVm | SecretLoginVm} [loginVmSecretLoginVm]
+ * @param {LoginVm | SecretLoginVm} [loginVm]
  * @param {*} [options] Override http request option.
  */
-export function login(loginVmSecretLoginVm = null, options = {}) {
+export function login(loginVm = null, options = {}) {
   const path = `/api/login`;
   const params = {};
 
@@ -35,7 +35,7 @@ export function login(loginVmSecretLoginVm = null, options = {}) {
     url: path,
     method: "POST",
     params,
-    data: loginVmSecretLoginVm,
+    data: loginVm,
     ...options,
   });
 }
